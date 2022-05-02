@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-	  <Folder Include="Model\"/>
+	  <Folder Include="Model\" />
   </ItemGroup>
 
 
