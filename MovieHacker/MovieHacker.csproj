@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-	  <Folder Include="Model\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup>
