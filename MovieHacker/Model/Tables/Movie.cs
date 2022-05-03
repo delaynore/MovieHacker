@@ -9,8 +9,8 @@ namespace MovieHacker.Model.Tables
     public class Movie
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        public string? MovieName { get; set; }
         public Genre? Genre { get; set; }
-        public DateTime? Duration { get; set; }
+        public int DurationInMinutes { get; set; }
     }
 }
