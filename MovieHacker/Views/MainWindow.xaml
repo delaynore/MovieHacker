@@ -39,7 +39,7 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <Frame x:Name="mainFrame1" NavigationUIVisibility="Hidden" Padding="10">
+            <Frame x:Name="mainFrame1" NavigationUIVisibility="Hidden" Padding="10" Source="/Views/PageSessions.xaml">
                 
             </Frame>
         </Grid>

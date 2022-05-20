@@ -10,12 +10,16 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition MaxHeight="50" MinHeight="20"/>
+            <RowDefinition/> 
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                <Button Content="Добавить" Padding="5" Margin="5"></Button>
+                <Button Content="Редактировать" Padding="5" Margin="5"></Button>
+                <Button Content="Удалить" Padding="5" Margin="5"></Button>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -28,8 +32,8 @@
                                 <ColumnDefinition MaxWidth="300" Width="*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Image HorizontalAlignment="Stretch" MaxHeight="160" MaxWidth="90" Source="{Binding Image}"/>
+                            <Grid Grid.Column="0" Margin="5">
+                                <Image HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
@@ -37,10 +41,10 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0">
+                                <Grid Grid.Row="0" Margin="5">
                                     <TextBlock Text="{Binding MovieName}" FontSize="18"></TextBlock>
                                 </Grid>
-                                <Grid Grid.Row="1">
+                                <Grid Grid.Row="1"  Margin="5">
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Text="{Binding Genre}"></TextBlock>
                                         <TextBlock Text="{Binding DurationInMinutes}"></TextBlock>

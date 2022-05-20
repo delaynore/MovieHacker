@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieHacker.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,14 @@ namespace MovieHacker.Views
         {
             InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (var db = new MHDataBase())
+            {
+                listBoGenres.ItemsSource = db.Genres.Select(x => x.GenreName).ToArray();
+            }
+        }
+               
     }
 }
