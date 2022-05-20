@@ -1,6 +1,7 @@
 ﻿using MovieHacker.Model.Tables;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace MovieHacker.Model
 {
@@ -95,7 +96,7 @@ namespace MovieHacker.Model
                         FilmRoom = filmrooms[num],
                         NumberAvailableSeats = filmrooms[num].Capacity,
                         Price = 320,
-                        StartTime = new DateTime(2022, rand.Next(1,13), rand.Next(1,20))
+                        StartTime = DateTime.Parse($"{2022}-{rand.Next(1, 13)}-{rand.Next(1, 28)} {rand.Next(0,24)}:{rand.Next(0, 60)}:00", CultureInfo.InvariantCulture)
                     });
                 }
                 db.Sessions.AddRange(sessions);
