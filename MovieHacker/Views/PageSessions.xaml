@@ -13,13 +13,19 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="White">
-            <StackPanel Orientation="Horizontal">
-                <ComboBox x:Name="FilterByFilmName" Margin="10" IsEditable="True" />
+            <StackPanel Orientation="Horizontal" Margin="5" ComboBox.SelectionChanged="FilterBy_SelectionChanged">
+                <TextBlock Text="Фильм: " VerticalAlignment="Center" Padding="5"/>
+                <ComboBox x:Name="FilterByFilm" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <TextBlock Text="Кинотеатр: " VerticalAlignment="Center"  Padding="5"/>
+                <ComboBox x:Name="FilterByCinema" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <TextBlock Text="Дата: " VerticalAlignment="Center"  Padding="5"/>
+                <DatePicker x:Name="FilterByDate" VerticalAlignment="Center" Width="120" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
+                <TextBlock x:Name="find1" ></TextBlock>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
-                 SelectedItem="{Binding Id}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="gridelement1">
@@ -27,18 +33,17 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-
-                            <Image Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" MaxHeight="160" MaxWidth="90" Source="{Binding Image}"/>
-                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding MovieName}" FontSize="16" MaxHeight="30"/>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Text="{Binding CinemaName}" FontSize="14"/>
-                                <TextBlock Text="{Binding StartTime}" FontSize="12"/>
-                                <TextBlock Text="{Binding Price}" FontSize="11"/>
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Image Margin="5" HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Margin="5">
+                                    <TextBlock Text="{Binding MovieName}" FontSize="16" MaxHeight="30" Padding="3"/>
+                                    <TextBlock Text="{Binding CinemaName}" FontSize="14" Padding="3"/>
+                                    <TextBlock Text="{Binding StartTime}" FontSize="12" Padding="3"/>
+                                    <TextBlock Text="{Binding Price}" FontSize="11" Padding="3"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

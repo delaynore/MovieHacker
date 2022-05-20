@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using MovieHacker.Model;
 
 namespace MovieHacker.Views
 {
@@ -23,6 +16,22 @@ namespace MovieHacker.Views
         public PageMovies()
         {
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            using (var db = new MHDataBase())
+            {
+                var films = db.Movies.Join(db.Genres, m => m.Genre.Id, g => g.Id, (m, g) => new
+                {
+                    Id = m.Id,
+                    Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
+                    MovieName = m.MovieName,
+                    Genre = g.GenreName,
+                    DurationInMinutes = m.DurationInMinutes
+                }).ToArray();
+                listBox1.ItemsSource = films;
+            }
         }
     }
 }
