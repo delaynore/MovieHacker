@@ -31,7 +31,8 @@ namespace MovieHacker.Views
                 MovieName = m.MovieName,
                 StartTime = s.StartTime.Value.ToString("f"),
                 Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.CinemaName
+                CinemaName = s.FilmRoom.Cinema.CinemaName,
+                FreePlaces = s.FilmRoom.Capacity
             }).ToArray();
             listBox1.ItemsSource = c1;
 
@@ -58,15 +59,30 @@ namespace MovieHacker.Views
                 MovieName = m.MovieName,
                 StartTime = s.StartTime.Value.ToString("f"),
                 Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.CinemaName
+                CinemaName = s.FilmRoom.Cinema.CinemaName,
+                FreePlaces = s.FilmRoom.Capacity
+
             }).ToArray();
 
             if (filterCinema != "-")
                 c1 = c1.Where(x => x.CinemaName.Contains(filterCinema)).ToArray();
+
             if (filterFilm != "-")
                 c1 = c1.Where(x => x.MovieName.Contains(filterFilm)).ToArray();
             find1.Text = c1.Length.ToString();
             listBox1.ItemsSource = c1;
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            //if (listBox1.SelectedItem == null) return;
+            //var se = listBox1.SelectedItem;
+            //MessageBox.Show(se.Tag.ToString());
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show((sender as Button).Tag.ToString());
         }
     }
 }

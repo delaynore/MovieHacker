@@ -25,10 +25,10 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="listBox1_MouseDoubleClick" SelectionMode="Single" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid x:Name="gridelement1">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
@@ -42,6 +42,11 @@
                                     <TextBlock Text="{Binding CinemaName}" FontSize="14" Padding="3"/>
                                     <TextBlock Text="{Binding StartTime}" FontSize="12" Padding="3"/>
                                     <TextBlock Text="{Binding Price}" FontSize="11" Padding="3"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Свободно: "></TextBlock>
+                                        <TextBlock Text="{Binding FreePlaces}"></TextBlock>
+                                        <Button Tag="{Binding Id}" Content="Забронировать" Click="Button_Click"></Button>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
                         </Grid>
