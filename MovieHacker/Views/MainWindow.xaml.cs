@@ -24,6 +24,7 @@ namespace MovieHacker.Views
         public MainWindow()
         {
             InitializeComponent();
+            NavButtonChangeColor("Sessions");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

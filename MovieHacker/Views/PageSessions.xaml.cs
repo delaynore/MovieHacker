@@ -32,7 +32,7 @@ namespace MovieHacker.Views
                 StartTime = s.StartTime.Value.ToString("f"),
                 Price = s.Price,
                 CinemaName = s.FilmRoom.Cinema.CinemaName,
-                FreePlaces = s.FilmRoom.Capacity
+                FreePlaces = s.NumberAvailableSeats
             }).ToArray();
             listBox1.ItemsSource = c1;
 
@@ -82,6 +82,7 @@ namespace MovieHacker.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            new AboutSessionWindow(int.Parse((sender as Button).Tag.ToString())).Show();
             MessageBox.Show((sender as Button).Tag.ToString());
         }
     }

@@ -18,6 +18,7 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
                 <Button Content="Добавить" Padding="5" Margin="5"></Button>
                 <Button Content="Редактировать" Padding="5" Margin="5"></Button>
+                <Button Content="Обновить" Padding="5" Margin="5"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">

@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded" >
-<!--Добавить грид и добавить сортировки-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
@@ -45,8 +44,8 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Свободно: "></TextBlock>
                                         <TextBlock Text="{Binding FreePlaces}"></TextBlock>
-                                        <Button Tag="{Binding Id}" Content="Забронировать" Click="Button_Click"></Button>
                                     </StackPanel>
+                                    <Button Tag="{Binding Id}" Content="Подробнее..." Click="Button_Click" Width="100" HorizontalAlignment="Left"></Button>
                                 </StackPanel>
                             </Grid>
                         </Grid>

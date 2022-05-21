@@ -7,20 +7,17 @@
         mc:Ignorable="d"
         Title="МувиХакер" Height="450" Width="850"
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
-
     <Window.Resources>
-        <!--<ControlTemplate TargetType="Button" x:Key="HeaderButtonT">
-            <TextBlock Text="{TemplateBinding Content}"></TextBlock>
-        </ControlTemplate>-->
-        <Style TargetType="Button" x:Key="HeaderButtonS">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="15,5,15,5"/>
-            <Setter Property="FontFamily" Value="Roboto"/>
-            <Setter Property="Background" Value="#b2bec3"/>
-            <Setter Property="BorderThickness" Value="0"/>
+        <Style x:Key="HeaderBar">
+            <Setter Property="Control.Background" Value="#c7ecee"/>
+        </Style>
 
+        <Style TargetType="Button" x:Key="ButtonOnHeader" BasedOn="{StaticResource HeaderBar}">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="20,5,20,5"/>
             <EventSetter Event="Click" Handler="Button_Click"/>
         </Style>
     </Window.Resources>
@@ -29,13 +26,13 @@
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridNav"  Grid.Row="0" Background="#b2bec3">
+        <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="navbtnSessions" Style="{StaticResource HeaderButtonS}" Tag="Sessions" Content="Сеансы"/>
-                <Button x:Name="navbtnMovies" Style="{StaticResource HeaderButtonS}" Tag="Movies" Content="Фильмы"/>
-                <Button x:Name="navbtnGenres" Style="{StaticResource HeaderButtonS}" Tag="Genres" Content="Жанры"/>
-                <Button x:Name="navbtnCinema" Style="{StaticResource HeaderButtonS}" Tag="Cinema" Content="Кинотеатры"/>
-                <Button x:Name="navbtnAdmin" Style="{StaticResource HeaderButtonS}" Tag="Admin" Content="Администрирование"/>
+                <Button x:Name="navbtnSessions" Style="{StaticResource ButtonOnHeader}" Tag="Sessions" Content="Сеансы"/>
+                <Button x:Name="navbtnMovies" Style="{StaticResource ButtonOnHeader}" Tag="Movies" Content="Фильмы"/>
+                <Button x:Name="navbtnGenres" Style="{StaticResource ButtonOnHeader}" Tag="Genres" Content="Жанры"/>
+                <Button x:Name="navbtnCinema" Style="{StaticResource ButtonOnHeader}" Tag="Cinema" Content="Кинотеатры"/>
+                <Button x:Name="navbtnAdmin" Style="{StaticResource ButtonOnHeader}" Tag="Admin" Content="Администрирование"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
