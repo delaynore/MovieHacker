@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MovieHacker.Styles">
+
+    <SolidColorBrush x:Key="DarkBlueBrush" Color="#1D3557"/>
+    <Color x:Key="DarkBLueColor">#1D3557</Color>
+
+    <SolidColorBrush x:Key="LightBlueBrush" Color="#457B9D"/>
+    <Color x:Key="LightBlueColor">#457B9D</Color>
+
+    <SolidColorBrush x:Key="BlondBlueBrush" Color="#A8DADC"/>
+    <Color x:Key="BlondBlueColor">#A8DADC</Color>
+
+    <SolidColorBrush x:Key="WhiteBrush" Color="#F1FAEE"/>
+    <Color x:Key="WhiteColor">#F1FAEE</Color>
+
+    <SolidColorBrush x:Key="LuminosityBrush" Color="#E63946"/>
+    <Color x:Key="RedColor">#E63946</Color>
+</ResourceDictionary>
