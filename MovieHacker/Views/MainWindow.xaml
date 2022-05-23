@@ -7,26 +7,13 @@
         mc:Ignorable="d"
         Title="МувиХакер" Height="450" Width="850"
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style x:Key="HeaderBar">
-            <Setter Property="Control.Background" Value="#c7ecee"/>
-        </Style>
-
-        <Style TargetType="Button" x:Key="ButtonOnHeader" BasedOn="{StaticResource HeaderBar}">
-            <Setter Property="Margin" Value="15"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Foreground" Value="#000"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="20,5,20,5"/>
-            <EventSetter Event="Click" Handler="Button_Click"/>
-        </Style>
-    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}">
+        <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}" Button.Click="Button_Click">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="navbtnSessions" Style="{StaticResource ButtonOnHeader}" Tag="Sessions" Content="Сеансы"/>
                 <Button x:Name="navbtnMovies" Style="{StaticResource ButtonOnHeader}" Tag="Movies" Content="Фильмы"/>
