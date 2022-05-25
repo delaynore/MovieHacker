@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MovieHacker.Styles" 
-                    xmlns:system="clr-namespace:System;assembly=netstandard">
-    <FontFamily x:Key="BaseFont">Roboto</FontFamily>
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <FontFamily x:Key="BaseFont">Montserrat</FontFamily>
+    <system:Double x:Key="Little">12</system:Double>
     <system:Double x:Key="Small">14</system:Double>
     <system:Double x:Key="Regular">16</system:Double>
     <system:Double x:Key="Big">18</system:Double>

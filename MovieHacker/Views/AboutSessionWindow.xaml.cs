@@ -22,8 +22,8 @@ namespace MovieHacker.Views
                         where s.Id == id
                         select new
                         {
-                            MovieName = s.Movie.MovieName,
-                            CinemaName = s.FilmRoom.Cinema.CinemaName,
+                            MovieName = s.Movie.Title,
+                            CinemaName = s.FilmRoom.Cinema.Name,
                             StartTime = s.StartTime,
                             Price = s.Price,
                             FreePlaces = s.NumberAvailableSeats

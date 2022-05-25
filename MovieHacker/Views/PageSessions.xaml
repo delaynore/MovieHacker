@@ -5,18 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded" >
-    <Grid>
+      d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded" 
+      >
+    <Grid Background="{StaticResource WhiteBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="White">
-            <StackPanel Orientation="Horizontal" Margin="5" ComboBox.SelectionChanged="FilterBy_SelectionChanged">
+        <Grid Grid.Row="0">
+            <StackPanel TextBlock.FontFamily="{StaticResource BaseFont}"
+                        Orientation="Horizontal"
+                        Margin="5" 
+                        ComboBox.SelectionChanged="FilterBy_SelectionChanged"
+                        >
                 <TextBlock Text="Фильм: " VerticalAlignment="Center" Padding="5"/>
-                <ComboBox x:Name="FilterByFilm" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <ComboBox FontFamily="{StaticResource BaseFont}"  x:Name="FilterByFilm" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
                 <TextBlock Text="Кинотеатр: " VerticalAlignment="Center"  Padding="5"/>
-                <ComboBox x:Name="FilterByCinema" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <ComboBox FontFamily="{StaticResource BaseFont}" x:Name="FilterByCinema" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
                 <TextBlock Text="Дата: " VerticalAlignment="Center"  Padding="5"/>
                 <DatePicker x:Name="FilterByDate" VerticalAlignment="Center" Width="120" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
                 <TextBlock x:Name="find1" ></TextBlock>
@@ -24,7 +29,10 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="listBox1_MouseDoubleClick" SelectionMode="Single" >
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                     MouseDoubleClick="listBox1_MouseDoubleClick" 
+                     SelectionMode="Single"
+                     Background="{StaticResource WhiteBrush}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -36,16 +44,37 @@
                                 <Image Margin="5" HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <StackPanel Margin="5">
-                                    <TextBlock Text="{Binding MovieName}" FontSize="16" MaxHeight="30" Padding="3"/>
-                                    <TextBlock Text="{Binding CinemaName}" FontSize="14" Padding="3"/>
-                                    <TextBlock Text="{Binding StartTime}" FontSize="12" Padding="3"/>
-                                    <TextBlock Text="{Binding Price}" FontSize="11" Padding="3"/>
+                                <StackPanel Margin="5" TextBlock.FontFamily="{StaticResource BaseFont}">
+                                    <TextBlock 
+                                        Text="{Binding MovieName}" 
+                                        FontSize="{StaticResource Big}" 
+                                        MaxHeight="30" 
+                                        Padding="3"/>
+                                    <TextBlock 
+                                        Text="{Binding CinemaName}"  
+                                        FontSize="{StaticResource Small}"
+                                        Padding="3"/>
+                                    <TextBlock 
+                                        Text="{Binding StartTime}"
+                                        FontSize="{StaticResource Small}"
+                                        Padding="3"/>
+                                    <TextBlock 
+                                        Text="{Binding Price}"  
+                                        FontSize="{StaticResource Little}" 
+                                        Padding="3"/>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Свободно: "></TextBlock>
-                                        <TextBlock Text="{Binding FreePlaces}"></TextBlock>
+                                        <TextBlock 
+                                            Text="Свободно: "
+                                            FontFamily="{StaticResource BaseFont}" 
+                                        FontSize="{StaticResource Little}"/>
+                                        <TextBlock Text="{Binding FreePlaces}"/>
                                     </StackPanel>
-                                    <Button Tag="{Binding Id}" Content="Подробнее..." Click="Button_Click" Width="100" HorizontalAlignment="Left"></Button>
+                                    <Button 
+                                        Tag="{Binding Id}" 
+                                        Content="Подробнее..."
+                                        Click="Button_Click" 
+                                        Width="100"
+                                        HorizontalAlignment="Left"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>

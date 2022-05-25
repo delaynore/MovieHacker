@@ -6,14 +6,20 @@
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
         Title="МувиХакер" Height="450" Width="850"
-        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
-    
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource BaseFont}"
+        FontSize="{StaticResource Regular}">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="9*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}" Button.Click="Button_Click">
+        <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}" Button.Click="Button_Click" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="navbtnSessions" Style="{StaticResource ButtonOnHeader}" Tag="Sessions" Content="Сеансы"/>
                 <Button x:Name="navbtnMovies" Style="{StaticResource ButtonOnHeader}" Tag="Movies" Content="Фильмы"/>
@@ -22,12 +28,12 @@
                 <Button x:Name="navbtnAdmin" Style="{StaticResource ButtonOnHeader}" Tag="Admin" Content="Администрирование"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Frame x:Name="mainFrame1" NavigationUIVisibility="Hidden" Padding="10" Source="/Views/PageSessions.xaml">
-                
+
             </Frame>
         </Grid>
-    
+
 
     </Grid>
 </Window>

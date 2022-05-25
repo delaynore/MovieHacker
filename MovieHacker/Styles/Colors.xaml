@@ -11,9 +11,12 @@
     <SolidColorBrush x:Key="BlondBlueBrush" Color="#A8DADC"/>
     <Color x:Key="BlondBlueColor">#A8DADC</Color>
 
-    <SolidColorBrush x:Key="WhiteBrush" Color="#F1FAEE"/>
-    <Color x:Key="WhiteColor">#F1FAEE</Color>
+    <SolidColorBrush x:Key="LikeWhiteBrush" Color="#F1FAEE"/>
+    <Color x:Key="LikeWhiteColor">#F1FAEE</Color>
+    
+    <SolidColorBrush x:Key="WhiteBrush" Color="#fff"/>
+    <Color x:Key="WhiteColor">#fff</Color>
 
-    <SolidColorBrush x:Key="LuminosityBrush" Color="#E63946"/>
-    <Color x:Key="RedColor">#E63946</Color>
+    <SolidColorBrush x:Key="ReddBrush" Color="#E63946"/>
+    <Color x:Key="ReddColor">#E63946</Color>
 </ResourceDictionary>

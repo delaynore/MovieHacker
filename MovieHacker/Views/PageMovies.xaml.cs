@@ -26,8 +26,8 @@ namespace MovieHacker.Views
                 {
                     Id = m.Id,
                     Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                    MovieName = m.MovieName,
-                    Genre = g.GenreName,
+                    MovieName = m.Title,
+                    Genre = g.Name,
                     DurationInMinutes = m.DurationInMinutes
                 }).ToArray();
                 listBox1.ItemsSource = films;

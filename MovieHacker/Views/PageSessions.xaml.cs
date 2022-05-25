@@ -28,16 +28,16 @@ namespace MovieHacker.Views
             {
                 Id = s.Id,
                 Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                MovieName = m.MovieName,
+                MovieName = m.Title,
                 StartTime = s.StartTime.Value.ToString("f"),
                 Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.CinemaName,
+                CinemaName = s.FilmRoom.Cinema.Name,
                 FreePlaces = s.NumberAvailableSeats
             }).ToArray();
             listBox1.ItemsSource = c1;
 
-            FilterByFilm.ItemsSource = db.Movies.Select(x => x.MovieName).ToArray().Append("-").Reverse();
-            FilterByCinema.ItemsSource = db.Cinemas.Select(x => x.CinemaName).ToArray().Append("-").Reverse();
+            FilterByFilm.ItemsSource = db.Movies.Select(x => x.Title).ToArray().Append("-").Reverse();
+            FilterByCinema.ItemsSource = db.Cinemas.Select(x => x.Name).ToArray().Append("-").Reverse();
 
         }
 
@@ -56,10 +56,10 @@ namespace MovieHacker.Views
             {
                 Id = s.Id,
                 Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                MovieName = m.MovieName,
+                MovieName = m.Title,
                 StartTime = s.StartTime.Value.ToString("f"),
                 Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.CinemaName,
+                CinemaName = s.FilmRoom.Cinema.Name,
                 FreePlaces = s.FilmRoom.Capacity
 
             }).ToArray();

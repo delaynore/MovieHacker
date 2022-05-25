@@ -31,7 +31,7 @@ namespace MovieHacker.Views
         {
             using (var db = new MHDataBase())
             {
-                listBoGenres.ItemsSource = db.Genres.Select(x => x.GenreName).ToArray();
+                listBoGenres.ItemsSource = db.Genres.Select(x => x.Name).ToArray();
             }
         }
                

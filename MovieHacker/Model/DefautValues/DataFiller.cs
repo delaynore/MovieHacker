@@ -17,54 +17,54 @@ namespace MovieHacker.Model
 
                 var genres = new[]
                 {
-                    new Genre { GenreName = "Комедия" },
-                    new Genre { GenreName = "Мультфильм" },
-                    new Genre { GenreName = "Триллер" },
-                    new Genre { GenreName = "Ужасы" },
-                    new Genre { GenreName = "Фантастика" },
-                    new Genre { GenreName = "Боевик" },
-                    new Genre { GenreName = "Драма"  },
-                    new Genre { GenreName = "Документальный" },
-                    new Genre { GenreName = "Биография" },
-                    new Genre { GenreName = "Фэнтези" }
+                    new Genre { Name = "Комедия" },
+                    new Genre { Name = "Мультфильм" },
+                    new Genre { Name = "Триллер" },
+                    new Genre { Name = "Ужасы" },
+                    new Genre { Name = "Фантастика" },
+                    new Genre { Name = "Боевик" },
+                    new Genre { Name = "Драма"  },
+                    new Genre { Name = "Документальный" },
+                    new Genre { Name = "Биография" },
+                    new Genre { Name = "Фэнтези" }
                 };
                 db.Genres.AddRange(genres);
 
                 var cinemas = new[]
                 {
-                    new Cinema { CinemaName = "Петровский" },
-                    new Cinema { CinemaName = "Матрица"},
-                    new Cinema { CinemaName = "Киномакс"},
-                    new Cinema { CinemaName = "Дядя Федор"},
-                    new Cinema { CinemaName = "Россия"}
+                    new Cinema { Name = "Петровский" },
+                    new Cinema { Name = "Матрица"},
+                    new Cinema { Name = "Киномакс"},
+                    new Cinema { Name = "Дядя Федор"},
+                    new Cinema { Name = "Россия"}
                 };
                 var rand = new Random();
                 var filmrooms = new[] 
                 {
-                    new FilmRoom { NameRoom = "Красный", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
-                    new FilmRoom { NameRoom = "Желтый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
-                    new FilmRoom { NameRoom = "Оранжевый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
-                    new FilmRoom { NameRoom = "Васильковый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
+                    new FilmRoom { Name = "Красный", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
+                    new FilmRoom { Name = "Желтый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
+                    new FilmRoom { Name = "Оранжевый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
+                    new FilmRoom { Name = "Васильковый", Capacity = rand.Next(20,50), Cinema = cinemas[0] },
 
-                    new FilmRoom { NameRoom = "Первый", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
-                    new FilmRoom { NameRoom = "Второй", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
-                    new FilmRoom { NameRoom = "Третий", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
-                    new FilmRoom { NameRoom = "Четвертый", Capacity = rand.Next(20,50), Cinema = cinemas[1] },
-                    new FilmRoom { NameRoom = "Пятый", Capacity = rand.Next(40,90), Cinema = cinemas[1] },
-                    new FilmRoom { NameRoom = "Шестой", Capacity = rand.Next(10,20), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Первый", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Второй", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Третий", Capacity = rand.Next(30,60), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Четвертый", Capacity = rand.Next(20,50), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Пятый", Capacity = rand.Next(40,90), Cinema = cinemas[1] },
+                    new FilmRoom { Name = "Шестой", Capacity = rand.Next(10,20), Cinema = cinemas[1] },
 
-                    new FilmRoom { NameRoom = "Кирпичный", Capacity = rand.Next(20,50), Cinema = cinemas[2] },
-                    new FilmRoom { NameRoom = "Бетонный", Capacity = rand.Next(20,50), Cinema = cinemas[2] },
+                    new FilmRoom { Name = "Кирпичный", Capacity = rand.Next(20,50), Cinema = cinemas[2] },
+                    new FilmRoom { Name = "Бетонный", Capacity = rand.Next(20,50), Cinema = cinemas[2] },
 
-                    new FilmRoom { NameRoom = "Первый", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
-                    new FilmRoom { NameRoom = "Второй", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
-                    new FilmRoom { NameRoom = "Третий", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
-                    new FilmRoom { NameRoom = "Четвертый", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
+                    new FilmRoom { Name = "Первый", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
+                    new FilmRoom { Name = "Второй", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
+                    new FilmRoom { Name = "Третий", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
+                    new FilmRoom { Name = "Четвертый", Capacity = rand.Next(50,75), Cinema = cinemas[3] },
 
-                    new FilmRoom { NameRoom = "Алмазный", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
-                    new FilmRoom { NameRoom = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
-                    new FilmRoom { NameRoom = "Аметистовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
-                    new FilmRoom { NameRoom = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
+                    new FilmRoom { Name = "Алмазный", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
+                    new FilmRoom { Name = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
+                    new FilmRoom { Name = "Аметистовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
+                    new FilmRoom { Name = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                 };
 
                 cinemas[0].FilmRooms = new List<FilmRoom>(filmrooms[0..4]);
@@ -77,12 +77,12 @@ namespace MovieHacker.Model
 
                 var movies = new[]
                 {
-                    new Movie { MovieName = "Люди в черном", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { MovieName = "Мстители", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { MovieName = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { MovieName = "Титаник", DurationInMinutes = rand.Next(100, 240), Genre = genres[6]},
-                    new Movie { MovieName = "Маска", DurationInMinutes = rand.Next(100, 240), Genre = genres[0]},
-                    new Movie { MovieName = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), Genre = genres[9]},
+                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
+                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
+                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
+                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), Genre = genres[6]},
+                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), Genre = genres[0]},
+                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), Genre = genres[9]},
                 };
                 db.Movies.AddRange(movies);
 
