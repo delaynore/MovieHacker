@@ -29,7 +29,7 @@ namespace MovieHacker.Views
                 Id = s.Id,
                 Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
                 MovieName = m.Title,
-                StartTime = s.StartTime.Value.ToString("f"),
+                StartTime = s.StartTime.ToString("f"),
                 Price = s.Price,
                 CinemaName = s.FilmRoom.Cinema.Name,
                 FreePlaces = s.NumberAvailableSeats
@@ -57,7 +57,7 @@ namespace MovieHacker.Views
                 Id = s.Id,
                 Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
                 MovieName = m.Title,
-                StartTime = s.StartTime.Value.ToString("f"),
+                StartTime = s.StartTime.ToString("f"),
                 Price = s.Price,
                 CinemaName = s.FilmRoom.Cinema.Name,
                 FreePlaces = s.FilmRoom.Capacity

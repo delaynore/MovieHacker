@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace MovieHacker.Model
 {
@@ -9,27 +10,25 @@ namespace MovieHacker.Model
     {
         public static void Fill()
         {
-            using (MHDataBase db = new MHDataBase())
+            using (MHDataBase db = new())
             {
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                db.SaveChanges();
 
                 var genres = new[]
                 {
-                    new Genre { Name = "Комедия" },
-                    new Genre { Name = "Мультфильм" },
-                    new Genre { Name = "Триллер" },
-                    new Genre { Name = "Ужасы" },
-                    new Genre { Name = "Фантастика" },
-                    new Genre { Name = "Боевик" },
-                    new Genre { Name = "Драма"  },
-                    new Genre { Name = "Документальный" },
-                    new Genre { Name = "Биография" },
-                    new Genre { Name = "Фэнтези" }
+                    new Genre { Name = "Комедия" },//0
+                    new Genre { Name = "Мультфильм" },//1
+                    new Genre { Name = "Триллер" },//2
+                    new Genre { Name = "Ужасы" },//3
+                    new Genre { Name = "Фантастика" },//4
+                    new Genre { Name = "Боевик" },//5
+                    new Genre { Name = "Драма"  },//6
+                    new Genre { Name = "Документальный" },//7
+                    new Genre { Name = "Биография" },//8
+                    new Genre { Name = "Фэнтези" }//9
                 };
                 db.Genres.AddRange(genres);
-
                 var cinemas = new[]
                 {
                     new Cinema { Name = "Петровский" },
@@ -38,6 +37,7 @@ namespace MovieHacker.Model
                     new Cinema { Name = "Дядя Федор"},
                     new Cinema { Name = "Россия"}
                 };
+                db.Cinemas.AddRange(cinemas);
                 var rand = new Random();
                 var filmrooms = new[] 
                 {
@@ -64,28 +64,35 @@ namespace MovieHacker.Model
                     new FilmRoom { Name = "Алмазный", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                     new FilmRoom { Name = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                     new FilmRoom { Name = "Аметистовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
-                    new FilmRoom { Name = "Рубиновый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
+                    new FilmRoom { Name = "Бриллиантовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                 };
 
-                cinemas[0].FilmRooms = new List<FilmRoom>(filmrooms[0..4]);
-                cinemas[1].FilmRooms = new List<FilmRoom>(filmrooms[4..10]);
-                cinemas[2].FilmRooms = new List<FilmRoom>(filmrooms[10..12]);
-                cinemas[3].FilmRooms = new List<FilmRoom>(filmrooms[12..16]);
-                cinemas[4].FilmRooms = new List<FilmRoom>(filmrooms[16..]);
-                db.Cinemas.AddRange(cinemas);
                 db.FilmRooms.AddRange(filmrooms);
-
                 var movies = new[]
                 {
-                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), Genre = genres[4]},
-                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), Genre = genres[6]},
-                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), Genre = genres[0]},
-                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), Genre = genres[9]},
+                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240)},//0
+                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240)},//1
+                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240)},//2
+                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240)},//3
+                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240)},//4
+                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240)},//5
                 };
                 db.Movies.AddRange(movies);
 
+                var movietogenre = new[]
+                {
+                    new MovieToGenre { Genre = genres[4], Movie = movies[0]},
+                    new MovieToGenre { Genre = genres[4], Movie = movies[5]},
+                    new MovieToGenre { Genre = genres[4], Movie = movies[2]},
+                    new MovieToGenre { Genre = genres[4], Movie = movies[4]},
+                    new MovieToGenre { Genre = genres[4], Movie = movies[1]},
+                    new MovieToGenre { Genre = genres[6], Movie = movies[3]},
+                    new MovieToGenre { Genre = genres[9], Movie = movies[5]},
+                    new MovieToGenre { Genre = genres[5], Movie = movies[0]},
+                    new MovieToGenre { Genre = genres[5], Movie = movies[1]},
+                    new MovieToGenre { Genre = genres[5], Movie = movies[2]},
+                };
+                db.MovieToGenre.AddRange(movietogenre);
                 List<Session> sessions = new List<Session>();
                 for (int i = 0; i < 100; i++)
                 {

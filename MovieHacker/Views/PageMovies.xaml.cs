@@ -22,15 +22,18 @@ namespace MovieHacker.Views
         {
             using (var db = new MHDataBase())
             {
-                var films = db.Movies.Join(db.Genres, m => m.Genre.Id, g => g.Id, (m, g) => new
-                {
-                    Id = m.Id,
-                    Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                    MovieName = m.Title,
-                    Genre = g.Name,
-                    DurationInMinutes = m.DurationInMinutes
-                }).ToArray();
-                listBox1.ItemsSource = films;
+                //var films = db.Movies.Join(db.Genres, m => m.Genres, g => g., (m, g) => new
+                //{
+                //    Id = m.Id,
+                //    Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
+                //    MovieName = m.Title,
+                //    Genre = g.Name,
+                //    DurationInMinutes = m.DurationInMinutes
+                //}).ToArray();
+                //listBox1.ItemsSource = films;
+                //db.
+               //var fi = from p in db.Movies
+               //         join g in db.Genres on p.Genres.
             }
         }
     }
