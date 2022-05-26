@@ -11,10 +11,6 @@
         FontSize="{StaticResource Regular}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="9*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>

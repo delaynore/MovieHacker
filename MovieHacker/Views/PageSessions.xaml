@@ -47,7 +47,7 @@
                                 <StackPanel Margin="5" TextBlock.FontFamily="{StaticResource BaseFont}">
                                     <TextBlock 
                                         Text="{Binding MovieName}" 
-                                        FontSize="{StaticResource Big}" 
+                                        FontSize="{StaticResource VeryBig}" 
                                         MaxHeight="30" 
                                         Padding="3"/>
                                     <TextBlock 
