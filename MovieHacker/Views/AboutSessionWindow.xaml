@@ -5,36 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
-        Title="AboutSessionWindow" SizeToContent="WidthAndHeight">
+        Title=""
+        Height="450" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Image Margin="5" HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding MovieName}" FontSize="16" MaxHeight="30" Padding="3"/>
-                                <TextBlock Text="{Binding CinemaName}" FontSize="14" Padding="3"/>
-                                <TextBlock Text="{Binding StartTime}" FontSize="12" Padding="3"/>
-                                <TextBlock Text="{Binding Price}" FontSize="11" Padding="3"/>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Свободно: "></TextBlock>
-                                    <TextBlock Text="{Binding FreePlaces}"></TextBlock>
-                                </StackPanel>
-                                <Button Tag="{Binding Id}" Content="Купить" Width="100" HorizontalAlignment="Left"></Button>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Image Margin="5" Stretch="Uniform" MaxHeight="320" MaxWidth="180" Source="C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico"/>
+            </Grid>
+            <Grid Grid.Column="1" TextBlock.FontFamily="{StaticResource BaseFont}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel Margin="5" VerticalAlignment="Top" >
+                        <TextBlock x:Name="movieName" FontSize="{StaticResource VeryBig}" Padding="3" TextDecorations="Underline"/>
+                        <TextBlock Text="Описание: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                        <TextBox x:Name="descriptionMovie" FontSize="{StaticResource Little}"
+                                   MaxHeight="225" HorizontalAlignment="Stretch" TextWrapping="Wrap" IsReadOnly="True" Focusable="False" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Кинотеатр: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                            <TextBlock x:Name="cinemaName" FontSize="{StaticResource Regular}" Padding="3" TextDecorations="Underline"/>
+                            <TextBlock Text="Зал: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                            <TextBlock x:Name="filmRoom" FontSize="{StaticResource Regular}" Padding="3" TextDecorations="Underline"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Дата: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                            <TextBlock x:Name="startTime" FontSize="{StaticResource Regular}" Padding="3" TextDecorations="Underline"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Цена: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                            <TextBlock x:Name="price" FontSize="{StaticResource Little}" Padding="3" TextDecorations="Underline"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1"  Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                        <TextBlock Text="Свободно/Всего: " FontSize="{StaticResource Regular}" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="freePlaces" FontSize="{StaticResource Regular}"  VerticalAlignment="Center"></TextBlock>
+                        <Button x:Name="toBookATicket" Content="Забронировать" Padding="5" FontSize="{StaticResource Regular}" Click="toBookATicket_Click" Margin="10" ></Button>
+                        
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </Grid>
+
     </Grid>
 </Window>

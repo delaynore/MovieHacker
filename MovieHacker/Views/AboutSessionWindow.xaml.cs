@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MovieHacker.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieHacker.Views
 {
@@ -16,20 +17,29 @@ namespace MovieHacker.Views
         public AboutSessionWindow(int id)
         {
             InitializeComponent();
+            FillWindow(id);
+        }
+        
+        private void FillWindow(int id)
+        {
             using (var db = new MHDataBase())
             {
-                var x = from s in db.Sessions
-                        where s.Id == id
-                        select new
-                        {
-                            MovieName = s.Movie.Title,
-                            CinemaName = s.FilmRoom.Cinema.Name,
-                            StartTime = s.StartTime,
-                            Price = s.Price,
-                            FreePlaces = s.NumberAvailableSeats
-                        };
-                listBox1.ItemsSource = x.ToArray();
+                var session = db.Sessions.Include(x=>x.Movie).Include(x=>x.FilmRoom).Include(x=>x.FilmRoom.Cinema).FirstOrDefault(x => x.Id == id);
+                if (session == null) return;
+                movieName.Text = session.Movie.Title;
+                cinemaName.Text = session.FilmRoom.Cinema.Name;
+                filmRoom.Text = session.FilmRoom.Name;
+                startTime.Text = session.StartTime.ToLocalTime().ToString("f");
+                price.Text = session.Price.ToString("C");
+                freePlaces.Text = session.NumberAvailableSeats.ToString() + "/" + session.FilmRoom.Capacity.ToString();
+                toBookATicket.Tag = session.Id;
+                descriptionMovie.Text = session.Movie.Description;
             }
+        }
+
+        private void toBookATicket_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
