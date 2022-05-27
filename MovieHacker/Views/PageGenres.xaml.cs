@@ -1,19 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieHacker.Model;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace MovieHacker.Views
 {
@@ -22,18 +12,30 @@ namespace MovieHacker.Views
     /// </summary>
     public partial class PageGenres : Page
     {
+        private BoolEvent checker;
         public PageGenres()
         {
             InitializeComponent();
+            checker = new BoolEvent();
+            checker.ForDo += UpdateGenres;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void UpdateGenres()
         {
             using (var db = new MHDataBase())
             {
-                listBoGenres.ItemsSource = db.Genres.Select(x => x.Name).ToArray();
+                db.Genres.Load();
+                listBoGenres.ItemsSource = db.Genres.Local.Select(x => x.Name).ToList();
             }
         }
-               
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            checker.Variable = true;
+        }
+
+        private void addGenre_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

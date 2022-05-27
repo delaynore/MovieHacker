@@ -6,8 +6,10 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageGenres" Background="#fff" Loaded="Page_Loaded" >
-
+      Title="PageGenres" Background="{StaticResource WhiteBrush}" Loaded="Page_Loaded" >
+    <Page.Resources>
+        
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
@@ -16,21 +18,46 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button Content="Добавить" Padding="5" Margin="5"></Button>
-                <Button Content="Редактировать" Padding="5" Margin="5"></Button>
-                <Button Content="Обновить" Padding="5" Margin="5"></Button>
+                <Button x:Name="addGenre" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
+                
             </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
+            </StackPanel>
+            
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBoGenres" Grid.Row="1" ItemsSource="{Binding}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="FontSize" Value="{StaticResource Regular}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border x:Name="brd" Background="{TemplateBinding Background}" CornerRadius="5"
+                                         BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource LightBlueBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="BorderBrush" Value="{DynamicResource DarkBlueBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                           
+                        </Setter>
+                        
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
     </Grid>
