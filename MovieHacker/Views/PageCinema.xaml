@@ -16,9 +16,13 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button Content="Добавить" Padding="5" Margin="5"></Button>
-                <Button Content="Редактировать" Padding="5" Margin="5"></Button>
-                <Button Content="Обновить" Padding="5" Margin="5"></Button>
+                <Button x:Name="addCinema" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
+
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -26,11 +30,41 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        </Grid>
+                        <Border>
+                            <Grid>
+                                <TextBlock Text="{Binding}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
+                                <Button Content="Подробнее..."  Style="{StaticResource ButtonOnHeader}" OpacityMask="{StaticResource DarkBlueBrush}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <Border x:Name="brd" Background="{TemplateBinding Background}" CornerRadius="5"
+                                         BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                                        
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource LightBlueBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="BorderBrush" Value="{DynamicResource DarkBlueBrush}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+
+                        </Setter>
+
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
     </Grid>

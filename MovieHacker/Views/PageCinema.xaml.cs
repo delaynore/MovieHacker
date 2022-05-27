@@ -24,5 +24,15 @@ namespace MovieHacker.Views
                 listBoCinemas.ItemsSource = db.Cinemas.Select(x => x.Name).ToArray();
             }
         }
+
+        private void addCinema_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ContentPresenter_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
