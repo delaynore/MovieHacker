@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTemplate x:Key="NavBarButton" TargetType="Button">
         <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
             <ContentPresenter Content="{TemplateBinding Content}"
                                               Margin="5"
                                               VerticalAlignment="Center"
                                               HorizontalAlignment="Center"
-                                              OpacityMask="{TemplateBinding Foreground}"/>
+                                              OpacityMask="{TemplateBinding Foreground}" />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -21,4 +21,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+  
 </ResourceDictionary>
