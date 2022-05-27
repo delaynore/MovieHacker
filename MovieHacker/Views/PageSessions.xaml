@@ -49,20 +49,20 @@
                                         Text="{Binding MovieName}" 
                                         FontSize="{StaticResource VeryBig}" 
                                         MaxHeight="30" 
-                                        Padding="3"/>
+                                        Margin="5"/>
                                     <TextBlock 
                                         Text="{Binding CinemaName}"  
                                         FontSize="{StaticResource Small}"
-                                        Padding="3"/>
+                                        Margin="5"/>
                                     <TextBlock 
                                         Text="{Binding StartTime}"
                                         FontSize="{StaticResource Small}"
-                                        Padding="3"/>
+                                        Margin="5"/>
                                     <TextBlock 
                                         Text="{Binding Price}"  
                                         FontSize="{StaticResource Little}" 
-                                        Padding="3"/>
-                                    <StackPanel Orientation="Horizontal">
+                                        Margin="5"/>
+                                    <StackPanel Orientation="Horizontal"  Margin="5">
                                         <TextBlock 
                                             Text="Свободно: "
                                             FontFamily="{StaticResource BaseFont}" 
@@ -70,6 +70,7 @@
                                         <TextBlock Text="{Binding FreePlaces}"/>
                                     </StackPanel>
                                     <Button 
+                                        Margin="5"
                                         Tag="{Binding Id}" 
                                         Content="Подробнее..."
                                         Click="Button_Click" 

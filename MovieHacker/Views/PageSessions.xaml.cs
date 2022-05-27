@@ -16,6 +16,7 @@ namespace MovieHacker.Views
     public partial class PageSessions : Page
     {
         private MHDataBase db;
+        private AboutSessionWindow aboutSessionWindow;
         public PageSessions()
         {
             InitializeComponent();
@@ -82,8 +83,13 @@ namespace MovieHacker.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new AboutSessionWindow(int.Parse((sender as Button).Tag.ToString())).Show();
-            MessageBox.Show((sender as Button).Tag.ToString());
+            if(sender is Button button && int.TryParse(button.Tag.ToString(), out var tag))
+            {
+                aboutSessionWindow = new AboutSessionWindow(tag);
+                aboutSessionWindow.ShowDialog();
+            }
+            
+           // MessageBox.Show((sender as Button).Tag.ToString());
         }
     }
 }
