@@ -32,7 +32,7 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      MouseDoubleClick="listBox1_MouseDoubleClick" 
                      SelectionMode="Single"
-                     Background="{StaticResource WhiteBrush}">
+                     ItemContainerStyle="{StaticResource ListBoxStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
