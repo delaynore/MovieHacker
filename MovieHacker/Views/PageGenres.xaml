@@ -30,7 +30,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBoGenres" Grid.Row="1" ItemsSource="{Binding}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource ListBoxStyle}">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}">
                 
             </ListBox>
         </Grid>

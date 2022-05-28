@@ -7,6 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded" 
       >
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+    </Page.Resources>
     <Grid Background="{StaticResource WhiteBrush}">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
@@ -32,55 +37,73 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                      MouseDoubleClick="listBox1_MouseDoubleClick" 
                      SelectionMode="Single"
-                     ItemContainerStyle="{StaticResource ListBoxStyle}">
+                     Style="{StaticResource ListBoxStyle}" 
+                     >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <Image Margin="5" HorizontalAlignment="Stretch" Height="240" Width="135" Source="{Binding Image}"/>
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <StackPanel Margin="5" TextBlock.FontFamily="{StaticResource BaseFont}">
-                                    <TextBlock 
-                                        Text="{Binding MovieName}" 
-                                        FontSize="{StaticResource VeryBig}" 
-                                        MaxHeight="30" 
-                                        Margin="5"/>
-                                    <TextBlock 
-                                        Text="{Binding CinemaName}"  
-                                        FontSize="{StaticResource Small}"
-                                        Margin="5"/>
-                                    <TextBlock 
-                                        Text="{Binding StartTime}"
-                                        FontSize="{StaticResource Small}"
-                                        Margin="5"/>
-                                    <TextBlock 
-                                        Text="{Binding Price}"  
-                                        FontSize="{StaticResource Little}" 
-                                        Margin="5"/>
-                                    <StackPanel Orientation="Horizontal"  Margin="5">
+                        <Border BorderThickness="0,0,0,2" BorderBrush="{StaticResource LightBlueBrush}"  >
+                            <Grid MaxWidth="400" MaxHeight="300" Width="400" Height="300">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Image Margin="5" HorizontalAlignment="Stretch" Height="240" Width="135" Source="{Binding Image}"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <StackPanel VerticalAlignment="Center" Margin="5" TextBlock.FontFamily="{StaticResource BaseFont}">
                                         <TextBlock 
-                                            Text="Свободно: "
-                                            FontFamily="{StaticResource BaseFont}" 
-                                        FontSize="{StaticResource Little}"/>
-                                        <TextBlock Text="{Binding FreePlaces}"/>
+                                            Text="{Binding MovieName}" 
+                                            FontSize="{StaticResource VeryBig}" 
+                                            MaxHeight="30" 
+                                            MaxWidth="225"
+                                            Margin="5"
+                                            />
+                                        <TextBlock 
+                                            Text="{Binding CinemaName}"  
+                                            FontSize="{StaticResource Small}"
+                                            Margin="5"
+                                            MaxWidth="250"/>
+                                        <TextBlock 
+                                            Text="{Binding StartTime}"
+                                            FontSize="{StaticResource Small}"
+                                            Margin="5"/>
+                                        <TextBlock 
+                                            Text="{Binding Price}"  
+                                            FontSize="{StaticResource Little}" 
+                                            Margin="5"
+                                            MaxWidth="200"/>
+                                        <StackPanel Orientation="Horizontal"  Margin="5" VerticalAlignment="Center">
+                                            <TextBlock 
+                                                Text="Свободно: "
+                                                FontFamily="{StaticResource BaseFont}" 
+                                                FontSize="{StaticResource Little}"
+                                                VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding FreePlaces}"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <Button
+                                            Style="{StaticResource ButtonOnHeader}"
+                                            Margin="5"
+                                            FontSize="{StaticResource Little}"
+                                            Tag="{Binding Id}" 
+                                            Content="Подробнее..."
+                                            Click="Button_Click" 
+                                            Width="100"
+                                            BorderThickness="0,0,0,2"
+                                            HorizontalAlignment="Left"/>
                                     </StackPanel>
-                                    <Button 
-                                        Margin="5"
-                                        Tag="{Binding Id}" 
-                                        Content="Подробнее..."
-                                        Click="Button_Click" 
-                                        Width="100"
-                                        HorizontalAlignment="Left"/>
-                                </StackPanel>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </Border>
+
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
     </Grid>

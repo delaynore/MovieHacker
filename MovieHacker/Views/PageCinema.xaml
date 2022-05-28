@@ -27,13 +27,13 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListBox x:Name="listBoCinemas" Grid.Row="1" ItemsSource="{Binding}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource ListBoxStyle}" ScrollViewer.CanContentScroll="False">
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}" ScrollViewer.CanContentScroll="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border>
                             <Grid>
                                 <TextBlock Text="{Binding}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
-                                <Button Content="Подробнее..."  Style="{StaticResource ButtonOnHeader}" OpacityMask="{StaticResource DarkBlueBrush}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
+                                <Button Content="Подробнее..."  Style="{StaticResource ButtonOnHeader}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
