@@ -41,6 +41,10 @@ namespace MovieHacker.Model.Extensions
         {
             return ImageToBase64(Image.FromFile(path), System.Drawing.Imaging.ImageFormat.Jpeg);
         }
+        public static string ImageToBase64(Image img)
+        {
+            return ImageToBase64(img, System.Drawing.Imaging.ImageFormat.Jpeg);
+        }
 
         public static BitmapImage ToXAMLView(string base64String)
         {

@@ -83,12 +83,12 @@ namespace MovieHacker.Model
                 db.Movies.AddRange(movies);
                 var pictures = new[]
                 {
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/Avengers.jpg"), Movie = movies[1]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/ManInBlack.jpg"), Movie = movies[0]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64( @"./Images/SpiderMan3.jpg"), Movie = movies[2]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/TheMask.jpg"), Movie = movies[4]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/TheWizardOfOz.jpg"), Movie = movies[5]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/Titanic.jpg"), Movie = movies[3]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.Avengers), Movie = movies[1]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.ManInBlack), Movie = movies[0]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.SpiderMan3), Movie = movies[2]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.TheMask), Movie = movies[4]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.TheWizardOfOz), Movie = movies[5]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.Titanic), Movie = movies[3]},
                 };
                 db.Pictures.AddRange(pictures);
                 var movietogenre = new[]
