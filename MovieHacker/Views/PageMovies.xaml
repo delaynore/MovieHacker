@@ -16,15 +16,19 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button Content="Добавить" Padding="5" Margin="5"></Button>
-                <Button Content="Редактировать" Padding="5" Margin="5"></Button>
-                <Button Content="Удалить" Padding="5" Margin="5"></Button>
+                <Button x:Name="addMovie" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addMovie_Click" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editMovie" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateMovie" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
+
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="deleteMovie" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
             <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
-                 SelectedItem="{Binding Id}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                 SelectedItem="{Binding Id}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>

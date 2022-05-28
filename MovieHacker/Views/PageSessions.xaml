@@ -8,8 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded" 
       >
     <Page.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Style TargetType="TextBlock" >
+            <Setter Property="TextTrimming" Value="WordEllipsis"/>
         </Style>
     </Page.Resources>
     <Grid Background="{StaticResource WhiteBrush}">
@@ -56,14 +56,16 @@
                                             Text="{Binding MovieName}" 
                                             FontSize="{StaticResource VeryBig}" 
                                             MaxHeight="30" 
-                                            MaxWidth="225"
+                                            MaxWidth="220"
                                             Margin="5"
+                                            TextTrimming="WordEllipsis"
                                             />
                                         <TextBlock 
                                             Text="{Binding CinemaName}"  
                                             FontSize="{StaticResource Small}"
                                             Margin="5"
-                                            MaxWidth="250"/>
+                                            MaxWidth="220"
+                                            TextTrimming="WordEllipsis"/>
                                         <TextBlock 
                                             Text="{Binding StartTime}"
                                             FontSize="{StaticResource Small}"
