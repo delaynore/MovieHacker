@@ -11,6 +11,7 @@ namespace MovieHacker.Model
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<Session> Sessions { get; set; } = null!;
         public DbSet<MovieToGenre> MovieToGenre { get; set; } = null!;
+        public DbSet<Picture> Pictures { get; set; } = null!;
 
         public MHDataBase()
         {
@@ -55,8 +56,11 @@ namespace MovieHacker.Model
                 entity.HasKey(m => m.Id);
                 entity.Property(m => m.Title).HasMaxLength(100).IsRequired();
                 entity.Property(m => m.Description).HasMaxLength(2048).IsRequired(false);
-
                 
+            });
+            modelBuilder.Entity<Picture>(entity =>
+            {
+                entity.HasOne(x => x.Movie).WithMany(x => x.Picture).HasForeignKey(x=>x.MovieId);
             });
             modelBuilder.Entity<MovieToGenre>(entity =>
             {
@@ -69,7 +73,7 @@ namespace MovieHacker.Model
                 entity.HasKey(s => s.Id);
 
                 entity.HasOne(s => s.Movie).WithMany(m=>m.Sessions);
-                entity.HasOne(s => s.FilmRoom).WithMany(f => f.Sessions); ;
+                entity.HasOne(s => s.FilmRoom).WithMany(f => f.Sessions);
             });
             base.OnModelCreating(modelBuilder);
         }
