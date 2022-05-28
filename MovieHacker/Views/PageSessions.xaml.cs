@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using Microsoft.EntityFrameworkCore;
 using MovieHacker.Model;
+using MovieHacker.Model.Extensions;
 
 namespace MovieHacker.Views
 {
@@ -16,7 +18,7 @@ namespace MovieHacker.Views
     public partial class PageSessions : Page
     {
         private MHDataBase db;
-        private AboutSessionWindow aboutSessionWindow;
+        private AboutSessionWindow? aboutSessionWindow;
         public PageSessions()
         {
             InitializeComponent();
@@ -25,17 +27,29 @@ namespace MovieHacker.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var c1 = db.Sessions.Join(db.Movies, s => s.Movie.Id, m => m.Id, (s, m) => new
-            {
-                Id = s.Id,
-                Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                MovieName = m.Title,
-                StartTime = s.StartTime.ToString("f"),
-                Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.Name,
-                FreePlaces = s.NumberAvailableSeats
-            }).ToArray();
-            listBox1.ItemsSource = c1;
+            var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie).Include(x => x.Movie.Picture);
+            //var c1 = db.Sessions.Join(db.Movies, s => s.Movie.Id, m => m.Id, (s, m) => new
+            //{
+            //    Id = s.Id,
+            //    Image = m.Picture,
+            //    MovieName = m.Title,
+            //    StartTime = s.StartTime.ToLocalTime().ToString("f"),
+            //    Price = s.Price,
+            //    CinemaName = s.FilmRoom.Cinema.Name,
+            //    FreePlaces = s.NumberAvailableSeats
+            //}).ToArray();
+            var c1 = from s in sessions
+                     select new
+                     {
+                         Id = s.Id,
+                         Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture.Path),
+                         MovieName = s.Movie.Title,
+                         StartTime = s.StartTime.ToLocalTime().ToString("f"),
+                         Price = s.Price,
+                         CinemaName = s.FilmRoom.Cinema.Name,
+                         FreePlaces = s.NumberAvailableSeats
+                     };
+            listBox1.ItemsSource = c1.ToArray();
 
             FilterByFilm.ItemsSource = db.Movies.Select(x => x.Title).ToArray().Append("-").Reverse();
             FilterByCinema.ItemsSource = db.Cinemas.Select(x => x.Name).ToArray().Append("-").Reverse();

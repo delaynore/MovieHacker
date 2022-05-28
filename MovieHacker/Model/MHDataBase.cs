@@ -60,7 +60,8 @@ namespace MovieHacker.Model
             });
             modelBuilder.Entity<Picture>(entity =>
             {
-                entity.HasOne(x => x.Movie).WithMany(x => x.Picture).HasForeignKey(x=>x.MovieId);
+                entity.HasOne(x => x.Movie).WithOne(x => x.Picture).HasForeignKey<Picture>(x=>x.MovieId);
+                entity.Property(x => x.Path).IsRequired(); 
             });
             modelBuilder.Entity<MovieToGenre>(entity =>
             {

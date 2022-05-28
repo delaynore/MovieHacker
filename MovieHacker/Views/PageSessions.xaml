@@ -41,7 +41,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <Image Margin="5" HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
+                                <Image Margin="5" HorizontalAlignment="Stretch" Height="240" Width="135" Source="{Binding Image}"/>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <StackPanel Margin="5" TextBlock.FontFamily="{StaticResource BaseFont}">

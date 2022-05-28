@@ -1,8 +1,11 @@
 ﻿using MovieHacker.Model.Tables;
+using MovieHacker.Model.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Drawing;
 
 namespace MovieHacker.Model
 {
@@ -66,7 +69,7 @@ namespace MovieHacker.Model
                     new FilmRoom { Name = "Аметистовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                     new FilmRoom { Name = "Бриллиантовый", Capacity = rand.Next(60,90), Cinema = cinemas[4] },
                 };
-
+                
                 db.FilmRooms.AddRange(filmrooms);
                 var movies = new[]
                 {
@@ -78,7 +81,16 @@ namespace MovieHacker.Model
                     new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240)},//5
                 };
                 db.Movies.AddRange(movies);
-
+                var pictures = new[]
+                {
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/Avengers.jpg"), Movie = movies[1]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/ManInBlack.jpg"), Movie = movies[0]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64( @"./Images/SpiderMan3.jpg"), Movie = movies[2]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/TheMask.jpg"), Movie = movies[4]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/TheWizardOfOz.jpg"), Movie = movies[5]},
+                    new Picture { Path = ImageBase64Converter.ImageToBase64(@"./Images/Titanic.jpg"), Movie = movies[3]},
+                };
+                db.Pictures.AddRange(pictures);
                 var movietogenre = new[]
                 {
                     new MovieToGenre { Genre = genres[4], Movie = movies[0]},
@@ -110,5 +122,6 @@ namespace MovieHacker.Model
                 db.SaveChanges();
             }
         }
+        
     }
 }
