@@ -19,7 +19,7 @@
                 <Button x:Name="addCinema" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
                 <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
                 <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
-
+                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>

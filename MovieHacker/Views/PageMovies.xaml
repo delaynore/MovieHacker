@@ -19,11 +19,13 @@
                 <Button x:Name="addMovie" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addMovie_Click" FontSize="{StaticResource Little}"></Button>
                 <Button x:Name="editMovie" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
                 <Button x:Name="updateMovie" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
-
+                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}"/>
             </StackPanel>
+
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Button x:Name="deleteMovie" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
             </StackPanel>
+            
         </Grid>
 
         <Grid Grid.Row="1">
@@ -33,7 +35,7 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MaxWidth="315" Width="*"/>
+                                <ColumnDefinition MaxWidth="315" Width="0.4*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" Margin="5">
@@ -41,7 +43,7 @@
                             </Grid>
                             <Grid Grid.Column="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.15*"/>
+                                    <RowDefinition Height="0.1*"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
@@ -51,19 +53,19 @@
                                 <Grid Grid.Row="1">
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Жанр: " Foreground="Gray"  FontFamily="{StaticResource BaseFont}"></TextBlock>
-                                            <TextBlock Text="{Binding Genre}" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="Жанр: " Foreground="Gray" FontSize="{StaticResource Little}"  FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding Genre}" FontSize="{StaticResource Regular}" FontFamily="{StaticResource BaseFont}"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="Продолжительность: " Foreground="Gray" FontFamily="{StaticResource BaseFont}"></TextBlock>
-                                            <TextBlock Text="{Binding DurationInMinutes}" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="Продолжительность: " FontSize="{StaticResource Little}" Foreground="Gray" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding DurationInMinutes}" FontSize="{StaticResource Regular}" FontFamily="{StaticResource BaseFont}"></TextBlock>
                                             <TextBlock Text=" мин."></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="В показе: " Foreground="Gray" VerticalAlignment="Center" FontFamily="{StaticResource BaseFont}"></TextBlock>
-                                            <TextBlock Text="{Binding IsActual}" VerticalAlignment="Center" IsEnabled="False" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="В показе: " Foreground="Gray" FontSize="{StaticResource Little}" VerticalAlignment="Center" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding IsActual}" VerticalAlignment="Center" FontSize="{StaticResource Regular}" IsEnabled="False" FontFamily="{StaticResource BaseFont}"></TextBlock>
                                         </StackPanel>
-                                        <TextBlock Text="Описание: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                                        <TextBlock Text="Описание: " Foreground="Gray"  FontSize="{StaticResource Little}"/>
                                         <TextBlock Text="{Binding Description}" FontSize="{StaticResource Little}" 
                                                 MaxHeight="225" HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
                                     </StackPanel>
