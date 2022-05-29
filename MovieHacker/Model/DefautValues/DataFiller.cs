@@ -73,12 +73,12 @@ namespace MovieHacker.Model
                 db.FilmRooms.AddRange(filmrooms);
                 var movies = new[]
                 {
-                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240)},//0
-                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240)},//1
-                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240)},//2
-                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240)},//3
-                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240)},//4
-                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240)},//5
+                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), IsActual = true},//0
+                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), IsActual = true},//1
+                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), IsActual = true},//2
+                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), IsActual = true},//3
+                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), IsActual = true},//4
+                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), IsActual = true},//5
                 };
                 db.Movies.AddRange(movies);
                 var pictures = new[]
