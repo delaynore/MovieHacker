@@ -29,8 +29,10 @@ namespace MovieHacker.Views
                             Id = p.Id,
                             MovieName = p.Title,
                             Image = ImageBase64Converter.ToXAMLView(p.Picture.Path),
-                            Genre = string.Join(", ", p.Genres.Select(x=>x.Genre.Name).ToList()),
-                            DurationInMinutes = p.DurationInMinutes
+                            Genre = string.Join(", ", p.Genres.Select(x => x.Genre.Name).ToList()),
+                            DurationInMinutes = p.DurationInMinutes,
+                            IsActual = p.IsActual ? "Да" : "Нет",
+                            Description = p.Description
                         };
                 listBox1.ItemsSource = s.ToArray();
             }

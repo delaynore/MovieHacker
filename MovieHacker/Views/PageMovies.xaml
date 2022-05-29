@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageMovies" Loaded="Page_Loaded">
-
+      Title="PageMovies" Loaded="Page_Loaded"
+      FontFamily="{StaticResource BaseFont}">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
@@ -27,31 +27,45 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}"
+            <ListBox x:Name="listBox1" Grid.Row="1" ItemsSource="{Binding}" FontFamily="{StaticResource BaseFont}"
                  SelectedItem="{Binding Id}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MaxWidth="300" Width="*"/>
+                                <ColumnDefinition MaxWidth="315" Width="*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0" Margin="5">
-                                <Image HorizontalAlignment="Stretch" MaxHeight="240" MaxWidth="135" Source="{Binding Image}"/>
+                                <Image HorizontalAlignment="Stretch" MaxHeight="560" MaxWidth="315" Source="{Binding Image}"/>
                             </Grid>
-                            <Grid Grid.Column="1">
+                            <Grid Grid.Column="1" Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.25*"/>
+                                    <RowDefinition Height="0.15*"/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="0" Margin="5">
-                                    <TextBlock Text="{Binding MovieName}" FontSize="18"></TextBlock>
+                                <Grid Grid.Row="0" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding MovieName}" FontSize="{StaticResource VeryBig}" FontFamily="{StaticResource BaseFont}"></TextBlock>
                                 </Grid>
-                                <Grid Grid.Row="1"  Margin="5">
+                                <Grid Grid.Row="1">
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding Genre}"></TextBlock>
-                                        <TextBlock Text="{Binding DurationInMinutes}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Жанр: " Foreground="Gray"  FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding Genre}" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Продолжительность: " Foreground="Gray" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding DurationInMinutes}" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text=" мин."></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="В показе: " Foreground="Gray" VerticalAlignment="Center" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                            <TextBlock Text="{Binding IsActual}" VerticalAlignment="Center" IsEnabled="False" FontFamily="{StaticResource BaseFont}"></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Text="Описание: " Foreground="Gray" FontSize="{StaticResource Little}"/>
+                                        <TextBlock Text="{Binding Description}" FontSize="{StaticResource Little}" 
+                                                MaxHeight="225" HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
