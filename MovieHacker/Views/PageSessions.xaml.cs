@@ -23,36 +23,42 @@ namespace MovieHacker.Views
         {
             InitializeComponent();
             db = new MHDataBase();
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie).Include(x => x.Movie.Picture);
-            //var c1 = db.Sessions.Join(db.Movies, s => s.Movie.Id, m => m.Id, (s, m) => new
-            //{
-            //    Id = s.Id,
-            //    Image = m.Picture,
-            //    MovieName = m.Title,
-            //    StartTime = s.StartTime.ToLocalTime().ToString("f"),
-            //    Price = s.Price,
-            //    CinemaName = s.FilmRoom.Cinema.Name,
-            //    FreePlaces = s.NumberAvailableSeats
-            //}).ToArray();
-            var c1 = from s in sessions
-                     select new
-                     {
-                         Id = s.Id,
-                         Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture.Path),
-                         MovieName = s.Movie.Title,
-                         StartTime = s.StartTime.ToLocalTime().ToString("f"),
-                         Price = s.Price,
-                         CinemaName = s.FilmRoom.Cinema.Name,
-                         FreePlaces = s.NumberAvailableSeats
-                     };
-            listBox1.ItemsSource = c1.ToArray();
-
-            FilterByFilm.ItemsSource = db.Movies.Select(x => x.Title).ToArray().Append("-").Reverse();
-            FilterByCinema.ItemsSource = db.Cinemas.Select(x => x.Name).ToArray().Append("-").Reverse();
+            var allMovies = db.Movies.Select(x => x.Title).Distinct().ToList();
+            allMovies.Insert(0, "Все фильмы");
+            var allCinemas = db.Cinemas.Select(x => x.Name).Distinct().ToList();
+            allCinemas.Insert(0, "Все кинотеатры");
+            FilterByCinema.ItemsSource = allCinemas;
+            FilterByFilm.ItemsSource = allMovies;
+            FilterByFilm.SelectedIndex = 0;
+            FilterByCinema.SelectedIndex = 0;
+            //var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie).Include(x => x.Movie.Picture);
+            ////var c1 = db.Sessions.Join(db.Movies, s => s.Movie.Id, m => m.Id, (s, m) => new
+            ////{
+            ////    Id = s.Id,
+            ////    Image = m.Picture,
+            ////    MovieName = m.Title,
+            ////    StartTime = s.StartTime.ToLocalTime().ToString("f"),
+            ////    Price = s.Price,
+            ////    CinemaName = s.FilmRoom.Cinema.Name,
+            ////    FreePlaces = s.NumberAvailableSeats
+            ////}).ToArray();
+            //var c1 = from s in sessions
+            //         select new
+            //         {
+            //             Id = s.Id,
+            //             Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture.Path),
+            //             MovieName = s.Movie.Title,
+            //             StartTime = s.StartTime.ToLocalTime().ToString("f"),
+            //             Price = s.Price,
+            //             CinemaName = s.FilmRoom.Cinema.Name,
+            //             FreePlaces = s.NumberAvailableSeats
+            //         };
+            //listBox1.ItemsSource = c1.ToArray();
 
         }
 
@@ -66,26 +72,25 @@ namespace MovieHacker.Views
             string? filterFilm = FilterByFilm.SelectedItem.ToString();
             if (filterCinema == null || filterFilm == null) return;
 
+            var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie).Include(x => x.Movie.Picture);
+            var c1 = from s in sessions
+                     select new
+                     {
+                         Id = s.Id,
+                         Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture.Path),
+                         MovieName = s.Movie.Title,
+                         StartTime = s.StartTime.ToLocalTime().ToString("f"),
+                         Price = s.Price,
+                         CinemaName = s.FilmRoom.Cinema.Name,
+                         FreePlaces = s.NumberAvailableSeats
+                     };
+            if (filterCinema != "Все кинотеатры")
+                c1 = c1.Where(x => x.CinemaName.Contains(filterCinema));
 
-            var c1 = db.Sessions.Join(db.Movies, s => s.Movie.Id, m => m.Id, (s, m) => new
-            {
-                Id = s.Id,
-                Image = @"C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico",
-                MovieName = m.Title,
-                StartTime = s.StartTime.ToString("f"),
-                Price = s.Price,
-                CinemaName = s.FilmRoom.Cinema.Name,
-                FreePlaces = s.FilmRoom.Capacity
-
-            }).ToArray();
-
-            if (filterCinema != "-")
-                c1 = c1.Where(x => x.CinemaName.Contains(filterCinema)).ToArray();
-
-            if (filterFilm != "-")
-                c1 = c1.Where(x => x.MovieName.Contains(filterFilm)).ToArray();
-            find1.Text = c1.Length.ToString();
-            listBox1.ItemsSource = c1;
+            if (filterFilm != "Все фильмы")
+                c1 = c1.Where(x => x.MovieName.Contains(filterFilm));
+            find1.Text = c1.Count().ToString();
+            listBox1.ItemsSource = c1.ToArray();
         }
 
         private void listBox1_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

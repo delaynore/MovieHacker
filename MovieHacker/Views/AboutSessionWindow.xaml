@@ -14,7 +14,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Image Margin="5" Stretch="Uniform" MaxHeight="320" MaxWidth="180" Source="C:\Users\delay\source\repos\MovieHacker\MovieHacker\Resources\main_icon.ico"/>
+                <Image x:Name="image1" Margin="5" Stretch="Uniform" MaxHeight="320" MaxWidth="180" Source="{Binding Image}"/>
             </Grid>
             <Grid Grid.Column="1" TextBlock.FontFamily="{StaticResource BaseFont}">
                 <Grid.RowDefinitions>

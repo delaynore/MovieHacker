@@ -21,12 +21,11 @@
             <StackPanel TextBlock.FontFamily="{StaticResource BaseFont}"
                         Orientation="Horizontal"
                         Margin="5" 
-                        ComboBox.SelectionChanged="FilterBy_SelectionChanged"
                         >
                 <TextBlock Text="Фильм: " VerticalAlignment="Center" Padding="5"/>
-                <ComboBox FontFamily="{StaticResource BaseFont}"  x:Name="FilterByFilm" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <ComboBox FontFamily="{StaticResource BaseFont}"  x:Name="FilterByFilm" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectionChanged="FilterBy_SelectionChanged"/>
                 <TextBlock Text="Кинотеатр: " VerticalAlignment="Center"  Padding="5"/>
-                <ComboBox FontFamily="{StaticResource BaseFont}" x:Name="FilterByCinema" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectedValue="-"/>
+                <ComboBox FontFamily="{StaticResource BaseFont}" x:Name="FilterByCinema" VerticalAlignment="Center" MaxWidth="120" Width="120" SelectionChanged="FilterBy_SelectionChanged"/>
                 <TextBlock Text="Дата: " VerticalAlignment="Center"  Padding="5"/>
                 <DatePicker x:Name="FilterByDate" VerticalAlignment="Center" Width="120" FirstDayOfWeek="Monday" SelectedDateFormat="Short"/>
                 <TextBlock x:Name="find1" ></TextBlock>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using MovieHacker.Model;
 using Microsoft.EntityFrameworkCore;
+using MovieHacker.Model.Extensions;
+using System.Drawing;
 
 namespace MovieHacker.Views
 {
@@ -24,7 +26,7 @@ namespace MovieHacker.Views
         {
             using (var db = new MHDataBase())
             {
-                var session = db.Sessions.Include(x=>x.Movie).Include(x=>x.FilmRoom).Include(x=>x.FilmRoom.Cinema).FirstOrDefault(x => x.Id == id);
+                var session = db.Sessions.Include(x=>x.Movie).Include(x=>x.FilmRoom).Include(x=>x.FilmRoom.Cinema).Include(x => x.Movie.Picture).FirstOrDefault(x => x.Id == id);
                 if (session == null) return;
                 movieName.Text = session.Movie.Title;
                 cinemaName.Text = session.FilmRoom.Cinema.Name;
@@ -34,6 +36,7 @@ namespace MovieHacker.Views
                 freePlaces.Text = session.NumberAvailableSeats.ToString() + "/" + session.FilmRoom.Capacity.ToString();
                 toBookATicket.Tag = session.Id;
                 descriptionMovie.Text = session.Movie.Description;
+                image1.Source = ImageBase64Converter.ToXAMLView(session.Movie.Picture.Path);
             }
         }
 
