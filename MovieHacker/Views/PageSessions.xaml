@@ -84,7 +84,7 @@
                                                        VerticalAlignment="Center"/>
                                         </StackPanel>
                                         <Button
-                                            Style="{StaticResource ButtonOnHeader}"
+                                            Style="{StaticResource BlueButton}"
                                             Margin="5"
                                             FontSize="{StaticResource Little}"
                                             Tag="{Binding Id}" 

@@ -9,19 +9,23 @@
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource BaseFont}"
         FontSize="{StaticResource Regular}">
-
+    <Window.Resources>
+        <Style x:Key="HeaderBar">
+            <Setter Property="Control.Background" Value="{StaticResource DarkBlueBrush}"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="gridNav"  Grid.Row="0" Style="{StaticResource HeaderBar}" Button.Click="Button_Click" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="navbtnSessions" Style="{StaticResource ButtonOnHeader}" Tag="Sessions" Content="Сеансы"/>
-                <Button x:Name="navbtnMovies" Style="{StaticResource ButtonOnHeader}" Tag="Movies" Content="Фильмы"/>
-                <Button x:Name="navbtnGenres" Style="{StaticResource ButtonOnHeader}" Tag="Genres" Content="Жанры"/>
-                <Button x:Name="navbtnCinema" Style="{StaticResource ButtonOnHeader}" Tag="Cinema" Content="Кинотеатры"/>
-                <Button x:Name="navbtnAdmin" Style="{StaticResource ButtonOnHeader}" Tag="Admin" Content="Администрирование"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="navbtnSessions" Style="{StaticResource BlueButton}" Tag="Sessions" Content="Сеансы" Margin="10,0"/>
+                <Button x:Name="navbtnMovies" Style="{StaticResource BlueButton}" Tag="Movies" Content="Фильмы"  Margin="10,0"/>
+                <Button x:Name="navbtnGenres" Style="{StaticResource BlueButton}" Tag="Genres" Content="Жанры"  Margin="10,0"/>
+                <Button x:Name="navbtnCinema" Style="{StaticResource BlueButton}" Tag="Cinema" Content="Кинотеатры"  Margin="10,0"/>
+                <Button x:Name="navbtnAdmin" Style="{StaticResource BlueButton}" Tag="Admin" Content="Администрирование"  Margin="10,0"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">

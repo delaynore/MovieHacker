@@ -16,13 +16,13 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="addCinema" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
-                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}"/>
+                <Button x:Name="addCinema" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource BlueButton}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
+                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -33,7 +33,7 @@
                         <Border>
                             <Grid>
                                 <TextBlock Text="{Binding}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
-                                <Button Content="Подробнее..."  Style="{StaticResource ButtonOnHeader}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
+                                <Button Content="Подробнее..."  Style="{StaticResource BlueButton}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

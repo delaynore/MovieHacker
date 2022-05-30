@@ -18,13 +18,13 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="addGenre" Style="{StaticResource ButtonOnHeader}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource ButtonOnHeader}"  Margin="5" FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource ButtonOnHeader}" Margin="5" FontSize="{StaticResource Little}"></Button>
-                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}"/>
+                <Button x:Name="addGenre" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource BlueButton}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
+                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource ButtonOnHeader}" Margin="5"  Background="{StaticResource ReddBrush}" BorderBrush="{StaticResource DarkBlueBrush}"  FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
             </StackPanel>
             
         </Grid>

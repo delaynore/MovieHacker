@@ -19,4 +19,7 @@
 
     <SolidColorBrush x:Key="ReddBrush" Color="#E63946"/>
     <Color x:Key="ReddColor">#E63946</Color>
+
+    <SolidColorBrush x:Key="LightReddBrush" Color="#FFE0989E"/>
+    <Color x:Key="LightReddColor">#FFE0989E</Color>
 </ResourceDictionary>

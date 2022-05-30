@@ -47,7 +47,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
                         <TextBlock Text="Свободно/Всего: " FontSize="{StaticResource Regular}" VerticalAlignment="Center"></TextBlock>
                         <TextBlock x:Name="freePlaces" FontSize="{StaticResource Regular}" VerticalAlignment="Center"></TextBlock>
-                        <Button x:Name="toBookATicket" Content="Забронировать" Padding="5" FontSize="{StaticResource Regular}" Click="toBookATicket_Click" Margin="10" ></Button>
+                        <Button x:Name="toBookATicket" Style="{StaticResource BlueButton}" Content="Забронировать" Padding="5" FontSize="{StaticResource Regular}" Click="toBookATicket_Click" Margin="10" ></Button>
                         
                     </StackPanel>
 
