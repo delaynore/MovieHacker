@@ -9,12 +9,15 @@ namespace MovieHacker.Model
     interface IDataBaseController<T> 
         where T: class
     {
-        public void Add(T x);
-        public void AddRange(params T[] x);
-        public void Remove(T x);
-        public void RemoveAt(int index);
+        public bool Add(T x);
+        public bool AddRange(params T[] x);
+        public bool Update(T x);
+        public bool Update(int id);
+        public bool Remove(T x);
+        public bool RemoveAt(int index);
         public T? Get(int id);
         public List<T> GetAll();
+        public List<T> GetAll(Func<T,bool> selector);
 
     }
 }

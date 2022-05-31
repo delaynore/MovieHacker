@@ -9,68 +9,109 @@ namespace MovieHacker.Model
 {
     public class MovieController : IDataBaseController<Movie>
     {
-        public void Add(Movie x)
+        public bool Add(Movie x)
         {
-            using (var db = new MHDataBase())
+            using var db = new MHDataBase();
+            try
             {
                 db.Movies.Add(x);
                 db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void AddRange(params Movie[] x)
+        public bool AddRange(params Movie[] x)
         {
-            using (var db = new MHDataBase())
+            using var db = new MHDataBase();
+            try
             {
                 db.Movies.AddRange(x);
                 db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
         public Movie? Get(int id)
         {
-            using (var db = new MHDataBase())
-            {
-                var res = db.Movies.FirstOrDefault(x => x.Id == id);
-                return res;
-            }
+            using var db = new MHDataBase();
+            var res = db.Movies.FirstOrDefault(x => x.Id == id);
+            return res;
         }
 
         public List<Movie> GetAll()
         {
-            using (var db = new MHDataBase())
-            {
-                db.Movies.Load();
-                return db.Movies.ToList();
-            }
+            return GetAll(x => true);
         }
 
-        public void Remove(Movie x)
+        public List<Movie> GetAll(Func<Movie, bool> selector)
         {
-            using (var db = new MHDataBase())
+            using var db = new MHDataBase();
+            db.Movies.Load();
+            return db.Movies.Local.Where(x => selector(x)).ToList();
+        }
+
+        public bool Remove(Movie x)
+        {
+            using var db = new MHDataBase();
+            try
             {
                 db.Movies.Remove(x);
                 db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void RemoveAt(int index)
+        public bool RemoveAt(int index)
         {
             using (var db = new MHDataBase())
             {
                 try
                 {
-                    db.Genres.Remove(db.Genres.First(x => x.Id == index));
+                    db.Movies.Remove(db.Movies.First(x => x.Id == index));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    MessageBox.Show(e.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
                 }
                 finally
                 {
                     db.SaveChanges();
+
                 }
             }
+            return true;
+        }
+
+        public bool Update(Movie x)
+        {
+            using var db = new MHDataBase();
+            try
+            {
+                db.Movies.Update(x);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool Update(int id)
+        {
+            return Update(Get(id));
         }
     }
 }
