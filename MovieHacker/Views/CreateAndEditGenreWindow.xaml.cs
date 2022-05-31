@@ -6,10 +6,10 @@ using System.Linq;
 using System;
 namespace MovieHacker.Views
 {
-    public partial class AddNewGenre : Window
+    public partial class CreateAndEditGenreWindow : Window
     {
         private IGenreWindowMode _windowMode;
-        public AddNewGenre(IGenreWindowMode mode)
+        public CreateAndEditGenreWindow(IGenreWindowMode mode)
         {
             InitializeComponent();
             _windowMode = mode;
