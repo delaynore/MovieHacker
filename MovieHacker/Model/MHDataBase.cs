@@ -10,7 +10,7 @@ namespace MovieHacker.Model
         public DbSet<FilmRoom> FilmRooms { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
         public DbSet<Session> Sessions { get; set; } = null!;
-        public DbSet<MovieToGenre> MovieToGenre { get; set; } = null!;
+        public DbSet<MovieToGenre> MovieToGenres { get; set; } = null!;
         public DbSet<Picture> Pictures { get; set; } = null!;
 
         public MHDataBase()

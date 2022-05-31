@@ -104,7 +104,7 @@ namespace MovieHacker.Model
                     new MovieToGenre { Genre = genres[5], Movie = movies[1]},
                     new MovieToGenre { Genre = genres[5], Movie = movies[2]},
                 };
-                db.MovieToGenre.AddRange(movietogenre);
+                db.MovieToGenres.AddRange(movietogenre);
                 List<Session> sessions = new List<Session>();
                 for (int i = 0; i < 100; i++)
                 {
