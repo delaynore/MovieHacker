@@ -6,9 +6,22 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageGenres" Background="{StaticResource WhiteBrush}" Loaded="Page_Loaded" >
+      Title="" Background="{StaticResource WhiteBrush}" Loaded="Page_Loaded" >
     <Page.Resources>
-        
+        <Style x:Key="BlueButton1" BasedOn="{StaticResource BlueButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=listBoGenres, Path=SelectedIndex}" Value="-1">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RedButton1" BasedOn="{StaticResource RedButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=listBoGenres, Path=SelectedIndex}" Value="-1">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,12 +32,12 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
                 <Button x:Name="addGenre" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource BlueButton}"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource BlueButton1}"  Margin="5" FontSize="{StaticResource Little}" Click="editGenre_Click"></Button>
                 <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
                 <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" FontSize="{StaticResource Little}"></Button>
             </StackPanel>
             
         </Grid>

@@ -3,7 +3,7 @@ using MovieHacker.Model;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-
+using MovieHacker.Model.WindowsModes;
 
 namespace MovieHacker.Views
 {
@@ -35,7 +35,14 @@ namespace MovieHacker.Views
 
         private void addGenre_Click(object sender, RoutedEventArgs e)
         {
+            new AddNewGenre(new AddNewGenreMode()).ShowDialog();
+        }
 
+        private void editGenre_Click(object sender, RoutedEventArgs e)
+        {
+            var s = new MHDataBase().Genres.Where(x=>x.Name == listBoGenres.SelectedItem.ToString()).First();
+            if (s == null) return;
+            new AddNewGenre(new EditGenreMode(s.Id, s.Name)).ShowDialog();
         }
     }
 }

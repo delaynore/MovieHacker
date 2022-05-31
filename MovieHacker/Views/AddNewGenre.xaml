@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
-        Title="AddNewGenre" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="" SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Padding="10" Background="{StaticResource BlondBlueBrush}">
+    <Window.Resources>
+        <Style x:Key="BlueButtonNew" BasedOn="{StaticResource BlueButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=textGenre, Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <WrapPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="textHint" Text="" Margin="5"/>
+            <TextBox x:Name="textGenre"  Style="{StaticResource myTextBox}" Margin="5" Background="{StaticResource BlondBlueBrush}"/>
+            <Button x:Name="button" Style="{StaticResource BlueButtonNew}" BorderThickness="0,0,0,2" Content="" Margin="5" Click="Button_Click"/>
+        </WrapPanel>
+    </Grid> 
 </Window>
