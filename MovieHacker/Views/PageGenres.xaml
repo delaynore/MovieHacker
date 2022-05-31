@@ -25,23 +25,27 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Background="{StaticResource DarkBlueBrush}">
+            <TextBlock Text="Жанры" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{StaticResource Big}" FontFamily="{StaticResource BaseFont}" Margin="5"
+                       Foreground="{StaticResource WhiteBrush}"/>
+        </Grid>
+        <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="addGenre" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
+                <Button  x:Name="addGenre" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addGenre_Click" FontSize="{StaticResource Little}"></Button>
                 <Button x:Name="editGenre" Content="Редактировать" Style="{StaticResource BlueButton1}"  Margin="5" FontSize="{StaticResource Little}" Click="editGenre_Click"></Button>
-                <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
-                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5"/>
+                <Button x:Name="updateGenre" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}" Click="updateGenre_Click"></Button>
+                <TextBox x:Name="textBoxFind" VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5" TextChanged="TextBoxFind_TextChanged"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" FontSize="{StaticResource Little}" Click="deleteGenre_Click"/>
             </StackPanel>
             
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <ListBox x:Name="listBoGenres" Grid.Row="1" ItemsSource="{Binding}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}">
                 
