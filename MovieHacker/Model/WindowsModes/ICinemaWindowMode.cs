@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public interface IGenreWindowMode : IMode
+    public interface ICinemaWindowMode : IMode
     {
-        public string TitleText { get; }
-        public string TextBlockText { get; }
+        public string? CinemaName { get; set; }
+        public string? DescriptionCinema { get; set; }
         public string ButtonContent { get; }
-        public string? GenreName { get; set; }
+        public bool IsReadOnly { get; }
     }
 }

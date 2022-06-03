@@ -6,34 +6,53 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageCinema" Background="#fff" Loaded="Page_Loaded">
-
+      Title="PageCinema" Background="{StaticResource WhiteBrush}" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style x:Key="BlueButton1" BasedOn="{StaticResource BlueButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=listBoCinemas, Path=SelectedIndex}" Value="-1">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RedButton1" BasedOn="{StaticResource RedButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=listBoCinemas, Path=SelectedIndex}" Value="-1">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition MaxHeight="50" MinHeight="20"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="addCinema" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource BlueButton}"  Margin="5" FontSize="{StaticResource Little}"></Button>
-                <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource BlueButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
-                <TextBox VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" Margin="5"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton}" Margin="5" FontSize="{StaticResource Little}"></Button>
-            </StackPanel>
+        <Grid Grid.Row="0" Background="{StaticResource DarkBlueBrush}">
+            <TextBlock Text="Кинотеатры" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="{StaticResource Big}" FontFamily="{StaticResource BaseFont}" Margin="5"
+                       Foreground="{StaticResource WhiteBrush}"/>
         </Grid>
         <Grid Grid.Row="1">
-            <ListBox x:Name="listBoCinemas" Grid.Row="1" ItemsSource="{Binding}"
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5">
+                <Button x:Name="addCinema" Style="{StaticResource BlueButton}" Content="Добавить" Margin="5" Click="addCinema_Click"  FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="editCinema" Content="Редактировать" Style="{StaticResource BlueButton1}" Click="editCinema_Click"  Margin="5" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="updateCinema" Content="Обновить" Style="{StaticResource BlueButton}" Click="updateCinema_Click" Margin="5" FontSize="{StaticResource Little}"></Button>
+                <TextBox x:Name="textBoxFind" VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" TextChanged="textBoxFind_TextChanged" Margin="5"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" Click="deleteGenre_Click" FontSize="{StaticResource Little}"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ListBox x:Name="listBoCinemas" ItemsSource="{Binding}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ListBoxStyle}" ScrollViewer.CanContentScroll="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border>
                             <Grid>
-                                <TextBlock Text="{Binding}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
-                                <Button Content="Подробнее..."  Style="{StaticResource BlueButton}" FontSize="{StaticResource Little}"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
+                                <Button Content="Подробнее..." Tag="{Binding Id}"  Style="{StaticResource BlueButton}" FontSize="{StaticResource Little}" Click="Button_Click"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
                             </Grid>
                         </Border>
                     </DataTemplate>
