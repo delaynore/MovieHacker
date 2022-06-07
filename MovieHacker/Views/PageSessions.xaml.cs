@@ -72,12 +72,12 @@ namespace MovieHacker.Views
             string? filterFilm = FilterByFilm.SelectedItem.ToString();
             if (filterCinema == null || filterFilm == null) return;
 
-            var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie).Include(x => x.Movie.Picture);
+            var sessions = db.Sessions.Include(x => x.FilmRoom).Include(x => x.FilmRoom.Cinema).Include(x => x.Movie);
             var c1 = from s in sessions
                      select new
                      {
                          Id = s.Id,
-                         Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture.Path),
+                         Image = ImageBase64Converter.ToXAMLView(s.Movie.Picture),
                          MovieName = s.Movie.Title,
                          StartTime = s.StartTime.ToLocalTime().ToString("f"),
                          Price = s.Price,
@@ -89,6 +89,7 @@ namespace MovieHacker.Views
 
             if (filterFilm != "Все фильмы")
                 c1 = c1.Where(x => x.MovieName.Contains(filterFilm));
+
             find1.Text = c1.Count().ToString();
             listBox1.ItemsSource = c1.ToArray();
         }

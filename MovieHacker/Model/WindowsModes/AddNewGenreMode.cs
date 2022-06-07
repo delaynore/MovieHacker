@@ -12,7 +12,7 @@
 
         public void Execute()
         {
-            new GenreController().Add(new Tables.Genre { Name = GenreName });
+            new GenreController().Add(new Tables.Genre { Name = GenreName! });
         }
     }
 }
