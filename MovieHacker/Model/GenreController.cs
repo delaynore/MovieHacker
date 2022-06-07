@@ -45,7 +45,12 @@ namespace MovieHacker.Model
             var res = db.Genres.FirstOrDefault(x => x.Id == id);
             return res;
         }
-
+        public Genre? Get(string name)
+        {
+            using var db = new MHDataBase();
+            var res = db.Genres.FirstOrDefault(x => x.Name == name);
+            return res;
+        }
         public List<Genre> GetAll()
         {
             return GetAll(x => true);

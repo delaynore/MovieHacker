@@ -42,7 +42,7 @@ namespace MovieHacker.Model
         public Movie? Get(int id)
         {
             using var db = new MHDataBase();
-            var res = db.Movies.FirstOrDefault(x => x.Id == id);
+            var res = db.Movies.Include(x=>x.Genres).ThenInclude(x=>x.Genre).FirstOrDefault(x => x.Id == id);
             return res;
         }
 

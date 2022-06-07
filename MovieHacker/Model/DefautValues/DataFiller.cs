@@ -73,24 +73,14 @@ namespace MovieHacker.Model
                 db.FilmRooms.AddRange(filmrooms);
                 var movies = new[]
                 {
-                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), IsActual = true},//0
-                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), IsActual = true},//1
-                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), IsActual = true},//2
-                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), IsActual = true},//3
-                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), IsActual = true},//4
-                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), IsActual = true},//5
+                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.ManInBlack)},//0
+                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Avengers)},//1
+                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.SpiderMan3)},//2
+                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Titanic)},//3
+                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheMask)},//4
+                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheWizardOfOz)},//5
                 };
                 db.Movies.AddRange(movies);
-                var pictures = new[]
-                {
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.Avengers), Movie = movies[1]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.ManInBlack), Movie = movies[0]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.SpiderMan3), Movie = movies[2]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.TheMask), Movie = movies[4]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.TheWizardOfOz), Movie = movies[5]},
-                    new Picture { Path = ImageBase64Converter.ImageToBase64(Resource.Titanic), Movie = movies[3]},
-                };
-                db.Pictures.AddRange(pictures);
                 var movietogenre = new[]
                 {
                     new MovieToGenre { Genre = genres[4], Movie = movies[0]},
