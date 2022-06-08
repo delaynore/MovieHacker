@@ -47,10 +47,10 @@
                 <TextBox x:Name="filmRoomName" Margin="5" Width="200" MaxLength="50" MaxWidth="200" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="filmRoomCapacity" Margin="5" Width="40" MaxWidth="40" MaxLength="5" VerticalContentAlignment="Center" PreviewTextInput="filmRoomCapacity_PreviewTextInput"/>
                 
-                <Button x:Name="addFilmRoom" Content="Добавить" Style="{StaticResource BlueButton2}" Margin="5" Click="addFilmRoom_Click" />
-                <Button x:Name="delFilmRoom" Content="Удалить"  Style="{StaticResource RedButton1}" Margin="5" Click="delFilmRoom_Click" />
+                <Button x:Name="addFilmRoom" Content="Добавить" Style="{StaticResource BlueButton2}" Margin="5" Click="addFilmRoom_Click" BorderThickness="0 0 0 2"/>
+                <Button x:Name="delFilmRoom" Content="Удалить"  Style="{StaticResource RedButton1}" Margin="5" Click="delFilmRoom_Click"   BorderThickness="0 0 0 2"/>
             </WrapPanel>
-            <Button x:Name="button1" Margin="5" Style="{StaticResource BlueButton1}" Content="" HorizontalAlignment="Right" Width="100" Click="Button_Click" />
+            <Button x:Name="button1" Margin="5" Style="{StaticResource BlueButton1}" Content="" HorizontalAlignment="Right" Width="100" Click="Button_Click"  BorderThickness="0 0 0 2"/>
         </WrapPanel>
         
         
