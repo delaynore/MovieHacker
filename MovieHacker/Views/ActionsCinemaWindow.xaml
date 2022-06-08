@@ -6,11 +6,28 @@
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
         Title="" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
-        Background="{StaticResource WhiteBrush}" Width="250" Height="275" FontFamily="{StaticResource BaseFont}">
+        Background="{StaticResource WhiteBrush}" SizeToContent="WidthAndHeight" FontFamily="{StaticResource BaseFont}">
     <Window.Resources>
         <Style x:Key="BlueButton1" BasedOn="{StaticResource BlueButton}" TargetType="Button">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=name1, Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BlueButton2" BasedOn="{StaticResource BlueButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=filmRoomName, Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=filmRoomCapacity, Path=Text}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RedButton1" BasedOn="{StaticResource RedButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=listBoxFilmRooms, Path=SelectedIndex}" Value="-1">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -21,7 +38,18 @@
             <TextBlock Text="Название кинотеатра: " HorizontalAlignment="Left"/>
             <TextBox x:Name="name1" Style="{StaticResource myTextBox}" MaxLength="50" Width="150" HorizontalAlignment="Left"/>
             <TextBlock Text="Описание:"/>
-            <TextBox x:Name="desc1" BorderBrush="{StaticResource DarkBlueBrush}" TextWrapping="Wrap" Height="100" MaxWidth="200"  MaxLength="2048" Width="200"/>
+            <TextBox x:Name="desc1" BorderBrush="{StaticResource DarkBlueBrush}" TextWrapping="Wrap" Height="100" MaxHeight="100" Width="500" MaxWidth="500" MaxLength="2048"/>
+            <TextBlock Text="Залы:" />
+            <ListBox x:Name="listBoxFilmRooms" Style="{StaticResource ListBoxStyle}" Height="100" MaxHeight="100" Width="500" MaxWidth="500" SelectionMode="Single" ScrollViewer.CanContentScroll="True">
+                
+            </ListBox>
+            <WrapPanel Orientation="Horizontal">
+                <TextBox x:Name="filmRoomName" Margin="5" Width="200" MaxLength="50" MaxWidth="200" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="filmRoomCapacity" Margin="5" Width="40" MaxWidth="40" MaxLength="5" VerticalContentAlignment="Center" PreviewTextInput="filmRoomCapacity_PreviewTextInput"/>
+                
+                <Button x:Name="addFilmRoom" Content="Добавить" Style="{StaticResource BlueButton2}" Margin="5" Click="addFilmRoom_Click" />
+                <Button x:Name="delFilmRoom" Content="Удалить"  Style="{StaticResource RedButton1}" Margin="5" Click="delFilmRoom_Click" />
+            </WrapPanel>
             <Button x:Name="button1" Margin="5" Style="{StaticResource BlueButton1}" Content="" HorizontalAlignment="Right" Width="100" Click="Button_Click" />
         </WrapPanel>
         

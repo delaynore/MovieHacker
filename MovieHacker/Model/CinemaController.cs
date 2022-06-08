@@ -98,7 +98,10 @@ namespace MovieHacker.Model
             using var db = new MHDataBase();
             try
             {
-                db.Cinemas.Update(x);
+                var c = db.Cinemas.First(c => c.Id == x.Id);
+                c.Name = x.Name;
+                c.Description = x.Description;
+                c.FilmRooms = x.FilmRooms;
                 db.SaveChanges();
                 return true;
             }

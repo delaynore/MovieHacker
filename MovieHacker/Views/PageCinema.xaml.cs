@@ -50,7 +50,7 @@ namespace MovieHacker.Views
             var id = int.Parse(selected.Split(',')[0].Split(' ')[^1]);
 
             using var db = new MHDataBase();
-            var selectedAsCinema = db.Cinemas.Where(x => x.Id == id).First();
+            var selectedAsCinema = db.Cinemas.Include(x=>x.FilmRooms).Where(x => x.Id == id).First();
             new ActionsCinemaWindow(new EditCinemaMode(selectedAsCinema)).ShowDialog();
             checker.Variable = true;
         }
@@ -84,7 +84,7 @@ namespace MovieHacker.Views
             var btn = sender as Button;
             if (btn == null || btn.Tag == null) return;
             var tag = int.Parse(btn.Tag.ToString());
-            new ActionsCinemaWindow(new AboutCinemaMode(new MHDataBase().Cinemas.Where(x=>x.Id == tag).First())).ShowDialog();
+            new ActionsCinemaWindow(new AboutCinemaMode(new MHDataBase().Cinemas.Include(x=>x.FilmRooms).Where(x=>x.Id == tag).First())).ShowDialog();
         }
     }
 }

@@ -41,7 +41,6 @@ namespace MovieHacker.Model
                 entity.HasKey(f => f.Id);
                 entity.HasAlternateKey(f => new {f.Name, f.CinemaId});
                 entity.Property(f=> f.Name).HasMaxLength(50).IsRequired();
-
             });
 
             modelBuilder.Entity<Genre>(entity =>

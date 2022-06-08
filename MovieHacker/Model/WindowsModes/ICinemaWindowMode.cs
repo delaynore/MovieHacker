@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MovieHacker.Model.Tables;
 
 namespace MovieHacker.Model.WindowsModes
 {
     public interface ICinemaWindowMode : IMode
     {
-        public string? CinemaName { get; set; }
-        public string? DescriptionCinema { get; set; }
+        public Cinema Cinema { get; set; }
         public string ButtonContent { get; }
         public bool IsReadOnly { get; }
     }

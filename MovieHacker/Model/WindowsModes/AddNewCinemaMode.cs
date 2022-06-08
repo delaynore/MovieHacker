@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MovieHacker.Model.Tables;
 
 namespace MovieHacker.Model.WindowsModes
 {
     public class AddNewCinemaMode : ICinemaWindowMode
     {
-        public string? CinemaName { get; set; } = "";
+        public Cinema Cinema { get; set; }
         public bool IsReadOnly => false;
-        public string? DescriptionCinema { get; set; } = "";
 
         public string ButtonContent => "Добавить";
-
+        public AddNewCinemaMode()
+        {
+            Cinema = new Cinema();
+        }
         public void Execute()
         {
-            new CinemaController().Add(new Tables.Cinema { Name = CinemaName, Description = DescriptionCinema });
+            new CinemaController().Add(Cinema);
         }
     }
 }
