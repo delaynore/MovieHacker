@@ -44,7 +44,7 @@ namespace MovieHacker.Model.Extensions
             return ImageToBase64(img, ImageFormat.Jpeg);
         }
 
-        public static BitmapImage? ToXAMLView(string base64String)
+        public static BitmapImage? ToXAMLView(string? base64String)
         {
             if (base64String == null) return null;
             byte[] binaryData = Convert.FromBase64String(base64String);
