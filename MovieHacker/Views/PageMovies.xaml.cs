@@ -10,16 +10,15 @@ using MovieHacker.Model.Extensions;
 
 namespace MovieHacker.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для PageMovies.xaml
-    /// </summary>
     public partial class PageMovies : Page
     {
-        private BoolEvent checker;
+        private readonly BoolEvent checker;
+        private readonly MovieController movieController;
         public PageMovies()
         {
             InitializeComponent();
-            checker = new BoolEvent();
+            movieController = new();
+            checker = new();
             checker.ForDo += UpdateMovies;
         }
 
@@ -29,30 +28,28 @@ namespace MovieHacker.Views
         }
         private void UpdateMovies()
         {
-            using (var db = new MHDataBase())
-            {
-                var selected = db.Movies
-                    .Include(x => x.Genres)
-                    .Select(x => new
-                    {
-                        Id = x.Id,
-                        MovieName = x.Title,
-                        Image = ImageBase64Converter.ToXAMLView(x.Picture),
-                        Genre = string.Join(", ", x.Genres.Select(x => x.Genre.Name).ToList()),
-                        DurationInMinutes = x.DurationInMinutes,
-                        IsActual = x.IsActual ? "Да" : "Нет",
-                        Description = x.Description
-                    })
-                    .AsEnumerable()
+            var movies = movieController
+                .GetAll()
+                .Select(x => new
+                        {
+                            Id = x.Id,
+                            MovieName = x.Title,
+                            Image = ImageBase64Converter.ToXAMLView(x.Picture!),
+                            Genre = string.Join(", ", x.Genres.Select(x => x.Name).ToList()),
+                            DurationInMinutes = x.DurationInMinutes,
+                            IsActual = x.IsActual.FromBoolToString(),
+                            Description = x.Description
+                         })
                     .Where(x => x.MovieName.IsContains(finder.Text))
                     .ToList();
-                listBox1.ItemsSource = selected;
+                listBox1.ItemsSource = movies;
                 checker.Variable = false;
-            }
+            
         }
         private void addMovie_Click(object sender, RoutedEventArgs e)
         {
-            new ActionsMovieWindow(new AddNewMovieMode()).ShowDialog();
+            new ActionsMovieWindow(new AddNewMovieMode(movieController)).ShowDialog();
+            checker.Variable = true;
         }
 
         private void updateMovie_Click(object sender, RoutedEventArgs e)
@@ -62,8 +59,11 @@ namespace MovieHacker.Views
 
         private void editMovie_Click(object sender, RoutedEventArgs e)
         {
-            var id = int.Parse(listBox1.SelectedItem.ToString().Split(',')[0].Split(' ')[^1]);
-            new ActionsMovieWindow(new EditMovieMode(new MovieController().Get(id))).ShowDialog();
+            var id = GetIdFromSelectedItem();
+            if (!id.HasValue) return;
+            var selectedMovie = movieController.Get(id.Value);
+            if (selectedMovie == null) return;
+            new ActionsMovieWindow(new EditMovieMode(selectedMovie, movieController)).ShowDialog();
             checker.Variable = true;
         }
 
@@ -74,21 +74,18 @@ namespace MovieHacker.Views
 
         private void deleteMovie_Click(object sender, RoutedEventArgs e)
         {
-            var id = int.Parse(listBox1.SelectedItem.ToString().Split(',')[0].Split(' ')[^1]);
-            var moviecontroller = new MovieController();
-            moviecontroller.RemoveAt(id);
+            var id = GetIdFromSelectedItem();
+            if (!id.HasValue) return;
+            movieController.RemoveAt(id.Value);
             checker.Variable = true;
         }
-    }
-    public static class Extension
-    {
-        public static bool IsContains(this string str, string containableString)
+
+        private int? GetIdFromSelectedItem()
         {
-            if (str == null || containableString == null) return true;
-            if (str.Length == 0 || containableString.Length == 0) return true;
-            var str1 = str.ToLower();
-            var str2 = containableString.ToLower();
-            return str1.Contains(str2);
+            var str = listBox1.SelectedItem.ToString();
+            if(str == null) return null;
+            var splited = str.Split(',')[0].Split(' ')[^1];
+            return Convert.ToInt32(splited);
         }
     }
 }

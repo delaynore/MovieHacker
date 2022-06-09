@@ -1,29 +1,24 @@
-﻿namespace MovieHacker.Model.WindowsModes
+﻿using MovieHacker.Model.Tables;
+
+namespace MovieHacker.Model.WindowsModes
 {
     public class EditGenreMode : IGenreWindowMode
     {
-        public string TitleText => "";
-
         public string TextBlockText => "Введите новое название:";
 
-        public string? GenreName { get; set; }
+        public string ButtonContent => "Сохранить";
 
-        public string ButtonContent => "Изменить";
-
-        private int _id;
-        public EditGenreMode(int id, string textContent)
+        public Genre Genre { get; set; }
+        public GenreController GenreController { get; }
+        public EditGenreMode(Genre genre, GenreController gC)
         {
-            _id = id;
-            GenreName = textContent;
+            Genre = genre;
+            GenreController = gC;
         }
 
         public void Execute()
         {
-            var gc = new GenreController();
-            var genre = gc.Get(_id);
-            if (genre == null) return;
-            genre.Name = GenreName;
-            gc.Update(genre);
+            GenreController.Update(Genre);
         }
     }
 }

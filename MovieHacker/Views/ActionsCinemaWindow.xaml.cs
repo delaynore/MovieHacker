@@ -1,4 +1,5 @@
 ﻿using MovieHacker.Model.WindowsModes;
+using MovieHacker.Model.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +16,28 @@ namespace MovieHacker.Views
     /// </summary>
     public partial class ActionsCinemaWindow : Window
     {
-        private ICinemaWindowMode _windowMode;
+        private ICinemaWindowMode mode;
         private ICollection<FilmRoom>? filmRooms;
-        private ICollection<FilmRoom>? filmRoomsToDelete;
+        //private ICollection<FilmRoom>? filmRoomsToDelete;
+        private CinemaController cinemaController;
         private BoolEvent checker;
         public ActionsCinemaWindow(ICinemaWindowMode windowMode)
         {
             InitializeComponent();
-            checker = new BoolEvent();
+            checker = new();
             checker.ForDo += UpdateFilmRooms;
-
-            _windowMode = windowMode;
-            desc1.Text = _windowMode.Cinema.Description;
-            name1.Text = _windowMode.Cinema.Name;
-            button1.Content = _windowMode.ButtonContent;
-            desc1.IsReadOnly = _windowMode.IsReadOnly;
-            name1.IsReadOnly = _windowMode.IsReadOnly;
-            addFilmRoom.Visibility = _windowMode.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            delFilmRoom.Visibility = _windowMode.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            filmRoomName.Visibility = _windowMode.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            filmRoomCapacity.Visibility = _windowMode.IsReadOnly ? Visibility.Collapsed : Visibility.Visible;
-            if (_windowMode.Cinema.FilmRooms != null)
-                filmRooms = _windowMode.Cinema.FilmRooms;
+            cinemaController = new();
+            mode = windowMode;
+            desc1.Text = mode.Cinema.Description;
+            name1.Text = mode.Cinema.Name;
+            button1.Content = mode.ButtonContent;
+            desc1.IsReadOnly = mode.IsReadOnly;
+            name1.IsReadOnly = mode.IsReadOnly;
+            addFilmRoom.Visibility = mode.IsReadOnly.BoolToVisibility();
+            delFilmRoom.Visibility = mode.IsReadOnly.BoolToVisibility();
+            filmRoomName.Visibility = mode.IsReadOnly.BoolToVisibility();
+            filmRoomCapacity.Visibility = mode.IsReadOnly.BoolToVisibility();
+            filmRooms = mode.Cinema.FilmRooms;
             checker.Variable = true;
         }
         private void UpdateFilmRooms()
@@ -46,18 +47,19 @@ namespace MovieHacker.Views
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!_windowMode.IsReadOnly)
-            { 
-                if(filmRoomsToDelete != null)
-                {
-                    using var db = new MHDataBase();
-                    db.FilmRooms.RemoveRange(filmRoomsToDelete);
-                    db.SaveChanges();
-                }
-                _windowMode.Cinema.FilmRooms = filmRooms;
-                _windowMode.Cinema.Name = name1.Text;
-                _windowMode.Cinema.Description = desc1.Text;
-                _windowMode.Execute();
+            if (!mode.IsReadOnly)
+            {
+                //if(filmRoomsToDelete != null)
+                //{
+                //    using var db = new MHDataBase();
+                //    db.FilmRooms.RemoveRange(filmRoomsToDelete);
+                //    db.SaveChanges();
+                //}
+                if (mode.Cinema.Id == 0)
+                    mode.Cinema.FilmRooms = filmRooms;
+                mode.Cinema.Name = name1.Text;
+                mode.Cinema.Description = desc1.Text;
+                mode.Execute();
             }
 
             Close();
@@ -66,13 +68,13 @@ namespace MovieHacker.Views
         private void addFilmRoom_Click(object sender, RoutedEventArgs e)
         {
             if (filmRooms == null) filmRooms = new List<FilmRoom>();
-            if (filmRooms.Select(x => x.Name).Contains(filmRoomName.Text))
+            if (filmRooms.Select(x => x.Name).IsAlreadyExistInEnumerable(filmRoomName.Text))
             {
                 MessageBox.Show($"{filmRoomName.Text} такой зал уже существует, введите другое имя", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
                 
-            filmRooms.Add(new FilmRoom { Name = filmRoomName.Text, Capacity = int.Parse(filmRoomCapacity.Text), Cinema = _windowMode.Cinema });
+            filmRooms.Add(new FilmRoom { Name = filmRoomName.Text, Capacity = int.Parse(filmRoomCapacity.Text), Cinema = mode.Cinema });
             filmRoomName.Text = "";
             filmRoomCapacity.Text = "";
             checker.Variable = true;
@@ -80,12 +82,8 @@ namespace MovieHacker.Views
 
         private void delFilmRoom_Click(object sender, RoutedEventArgs e)
         {
-            var name = listBoxFilmRooms.SelectedItem?.ToString()?.Split(' ')[0];
+            var name = GetNameFromSelected();
             if (name == null) return;
-            var item = new MHDataBase().FilmRooms.FirstOrDefault(x => x.Name == name);
-            if (filmRoomsToDelete == null) filmRoomsToDelete = new List<FilmRoom>();
-            if(item != null)
-                filmRoomsToDelete.Add(item);
             filmRooms?.Remove(filmRooms.First(x=>x.Name == name));
             checker.Variable = true;
         }
@@ -93,6 +91,14 @@ namespace MovieHacker.Views
         private void filmRoomCapacity_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
+        }
+
+        private string GetNameFromSelected()
+        {
+            var selected = listBoxFilmRooms.SelectedItem.ToString();
+            if (selected == null) return null;
+            var splited = selected.Split(' ')[0];
+            return splited;
         }
     }
 }

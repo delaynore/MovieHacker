@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Drawing.Imaging;
 
 namespace MovieHacker.Model.Extensions
 {
@@ -13,6 +10,7 @@ namespace MovieHacker.Model.Extensions
     {
         public static Image Base64ToImage(string base64String)
         {
+
             // Convert Base64 String to byte[]
             byte[] imageBytes = Convert.FromBase64String(base64String);
             MemoryStream ms = new MemoryStream(imageBytes, 0,
@@ -23,8 +21,7 @@ namespace MovieHacker.Model.Extensions
             Image image = Image.FromStream(ms, true);
             return image;
         }
-        public static string ImageToBase64(Image image,
-  System.Drawing.Imaging.ImageFormat format)
+        public static string ImageToBase64(Image image, ImageFormat format)
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -37,13 +34,14 @@ namespace MovieHacker.Model.Extensions
                 return base64String;
             }
         }
-        public static string ImageToBase64(string path)
+        public static string? ImageToBase64(string? path)
         {
-            return ImageToBase64(Image.FromFile(path), System.Drawing.Imaging.ImageFormat.Jpeg);
+            if(path == null) return null;
+            return ImageToBase64(Image.FromFile(path), ImageFormat.Jpeg);
         }
         public static string ImageToBase64(Image img)
         {
-            return ImageToBase64(img, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return ImageToBase64(img, ImageFormat.Jpeg);
         }
 
         public static BitmapImage? ToXAMLView(string base64String)

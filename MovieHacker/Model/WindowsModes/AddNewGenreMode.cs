@@ -1,18 +1,23 @@
-﻿namespace MovieHacker.Model.WindowsModes
+﻿using MovieHacker.Model.Tables;
+
+namespace MovieHacker.Model.WindowsModes
 {
     public class AddNewGenreMode : IGenreWindowMode
     {
-        public string TitleText => "";
 
         public string TextBlockText => "Введите название жанра: ";
 
-        public string? GenreName { get; set; } = "";
-
         public string ButtonContent => "Добавить";
-
+        public GenreController GenreController { get; }
+        public Genre Genre { get; set; }
+        public AddNewGenreMode(GenreController gC)
+        {
+            Genre = new Genre();
+            GenreController = gC;  
+        }
         public void Execute()
         {
-            new GenreController().Add(new Tables.Genre { Name = GenreName! });
+            GenreController.Add(Genre);
         }
     }
 }

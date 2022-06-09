@@ -8,9 +8,13 @@ namespace MovieHacker.Model
 {
     public class CinemaController : IDataBaseController<Cinema>
     {
-        public bool Add(Cinema x)
+        private MHDataBase db;
+        public CinemaController()
         {
-            using var db = new MHDataBase();
+            db = new();
+        }
+        public override bool Add(Cinema x)
+        {
             try
             {
                 db.Cinemas.Add(x);
@@ -23,9 +27,8 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool AddRange(params Cinema[] x)
+        public override bool AddRange(params Cinema[] x)
         {
-            using var db = new MHDataBase();
             try
             {
                 db.Cinemas.AddRange(x);
@@ -38,28 +41,19 @@ namespace MovieHacker.Model
             }
         }
 
-        public Cinema? Get(int id)
+        public override Cinema? Get(int id)
         {
-            using var db = new MHDataBase();
             var res = db.Cinemas.FirstOrDefault(x => x.Id == id);
             return res;
         }
 
-        public List<Cinema> GetAll()
+        public override List<Cinema> GetAll()
         {
-            return GetAll(x => true);
+            return db.Cinemas.Include(x=>x.FilmRooms).ToList();
         }
 
-        public List<Cinema> GetAll(Func<Cinema, bool> selector)
+        public override bool Remove(Cinema x)
         {
-            using var db = new MHDataBase();
-            db.Cinemas.Load();
-            return db.Cinemas.Local.Where(x => selector(x)).ToList();
-        }
-
-        public bool Remove(Cinema x)
-        {
-            using var db = new MHDataBase();
             try
             {
                 db.Cinemas.Remove(x);
@@ -72,36 +66,36 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool RemoveAt(int index)
+        public override bool RemoveAt(int index)
         {
-            using (var db = new MHDataBase())
-            {
-                try
-                {
-                    db.Cinemas.Remove(db.Cinemas.First(x => x.Id == index));
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-                finally
-                {
-                    db.SaveChanges();
 
-                }
-            }
-            return true;
-        }
-
-        public bool Update(Cinema x)
-        {
-            using var db = new MHDataBase();
             try
             {
-                var c = db.Cinemas.First(c => c.Id == x.Id);
-                c.Name = x.Name;
-                c.Description = x.Description;
-                c.FilmRooms = x.FilmRooms;
+                db.Cinemas.Remove(db.Cinemas.First(x => x.Id == index));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                db.SaveChanges();
+
+            }
+
+            return true;
+        }
+       
+        public override void SaveChanges()
+        {
+            db.SaveChanges();
+        }
+
+        public override bool Update(params Cinema[] x)
+        {
+            try
+            {
+                db.Cinemas.UpdateRange(x);
                 db.SaveChanges();
                 return true;
             }
@@ -111,9 +105,11 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool Update(int id)
+        public override bool Update(int id)
         {
-            return Update(Get(id));
+            var x = Get(id);
+            if (x == null) return false;
+            return Update(x);
         }
     }
 }

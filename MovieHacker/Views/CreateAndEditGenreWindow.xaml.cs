@@ -1,5 +1,6 @@
 ﻿using MovieHacker.Model;
 using MovieHacker.Model.Tables;
+using MovieHacker.Model.Extensions;
 using MovieHacker.Model.WindowsModes;
 using System.Windows;
 using System.Linq;
@@ -8,22 +9,26 @@ namespace MovieHacker.Views
 {
     public partial class CreateAndEditGenreWindow : Window
     {
-        private IGenreWindowMode _windowMode;
-        public CreateAndEditGenreWindow(IGenreWindowMode mode)
+        private readonly IGenreWindowMode mode;
+        public CreateAndEditGenreWindow(IGenreWindowMode windowMode)
         {
             InitializeComponent();
-            _windowMode = mode;
-            Title = _windowMode.TitleText;
-            textHint.Text = _windowMode.TextBlockText;
-            button.Content = _windowMode.ButtonContent;
-            textGenre.Text = _windowMode.GenreName;
+            mode = windowMode;
+            textHint.Text = mode.TextBlockText;
+            button.Content = mode.ButtonContent;
+            textGenre.Text = mode.Genre.Name;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _windowMode.GenreName = textGenre.Text;
-            _windowMode.Execute();
-            Close();
+            if(mode.GenreController.GetAll().Select(x=>x.Name).IsAlreadyExistInEnumerable(textGenre.Text))
+                MessageBox.Show("Такой жанр уже существует! Введите другое имя", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                mode.Genre.Name = textGenre.Text;
+                mode.Execute();
+                Close();
+            }
         }
 
     }

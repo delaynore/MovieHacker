@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace MovieHacker.Model
 {
-    interface IDataBaseController<T> 
+     public abstract class IDataBaseController<T> 
         where T: class
     {
-        public bool Add(T x);
-        public bool AddRange(params T[] x);
-        public bool Update(T x);
-        public bool Update(int id);
-        public bool Remove(T x);
-        public bool RemoveAt(int index);
-        public T? Get(int id);
-        public List<T> GetAll();
-        public List<T> GetAll(Func<T,bool> selector);
+        public abstract void SaveChanges();
+        public abstract bool Add(T x);
+        public abstract bool AddRange(params T[] x);
+        public abstract bool Update(params T[] x);
+        public abstract bool Update(int id);
+        public abstract bool Remove(T x);
+        public abstract bool RemoveAt(int index);
+        public abstract T? Get(int id);
+        public abstract List<T> GetAll();
 
     }
 }

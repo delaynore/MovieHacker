@@ -8,9 +8,9 @@ namespace MovieHacker.Model.Tables
         public string Title { get; set; }
         public string Description { get; set; }
         public int DurationInMinutes { get; set; }
-        public string Picture { get; set; }
+        public string? Picture { get; set; }
         public bool IsActual { get; set; }
-        public virtual ICollection<MovieToGenre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Session>? Sessions { get; set; }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
-        Title="" Height="475" Width="800" FontFamily="{StaticResource BaseFont}" ResizeMode="NoResize">
+        Title="" Height="475" Width="800" FontFamily="{StaticResource BaseFont}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource BlueButton}" x:Key="BlueButton2">
             <Style.Triggers>
@@ -88,7 +88,7 @@
                         <TextBlock Text="Жанры:"/>
                         <StackPanel Orientation="Horizontal">
                             <ListBox x:Name="listBox1" Style="{StaticResource ListBoxStyle}" Height="100" MaxHeight="100" Width="500" MaxWidth="500" SelectionMode="Single">
-
+                               
                             </ListBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" >

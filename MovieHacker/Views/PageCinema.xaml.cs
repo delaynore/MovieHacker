@@ -5,30 +5,28 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 using MovieHacker.Model.WindowsModes;
+using MovieHacker.Model.Extensions;
+using System;
 
 namespace MovieHacker.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для PageCinema.xaml
-    /// </summary>
     public partial class PageCinema : Page
     {
         private BoolEvent checker;
+        private CinemaController cinemaController;
         public PageCinema()
         {
             InitializeComponent();
-            checker = new BoolEvent();
+            checker = new();
             checker.ForDo += UpdateCinemas;
+            cinemaController = new();
         }
         private void UpdateCinemas()
         {
-            using (var db = new MHDataBase())
-            {
-                db.Cinemas.Load();
-                var s = db.Cinemas.Local.Select(x => new { x.Id, x.Name }).Where(x=>x.Name.ToLower().Contains(textBoxFind.Text.ToLower()));
-                listBoCinemas.ItemsSource = s.ToList();
-                checker.Variable = false;
-            }
+            var s = cinemaController.GetAll().Select(x => new { x.Id, x.Name }).Where(x => x.Name!.IsContains(textBoxFind.Text));
+            listBoCinemas.ItemsSource = s.ToList();
+            checker.Variable = false;
+
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -37,21 +35,18 @@ namespace MovieHacker.Views
 
         private void addCinema_Click(object sender, RoutedEventArgs e)
         {
-            new ActionsCinemaWindow(new AddNewCinemaMode()).ShowDialog();
+            new ActionsCinemaWindow(new AddNewCinemaMode(cinemaController)).ShowDialog();
             checker.Variable = true;
         }
 
 
         private void editCinema_Click(object sender, RoutedEventArgs e)
         {
-            if (listBoCinemas.SelectedItem == null) return;
-            var selected = listBoCinemas.SelectedItem.ToString();
-            if (selected == null) return;
-            var id = int.Parse(selected.Split(',')[0].Split(' ')[^1]);
-
-            using var db = new MHDataBase();
-            var selectedAsCinema = db.Cinemas.Include(x=>x.FilmRooms).Where(x => x.Id == id).First();
-            new ActionsCinemaWindow(new EditCinemaMode(selectedAsCinema)).ShowDialog();
+            var id = GetIdFromSelectedItem();
+            if (!id.HasValue) return;
+            var selectedAsCinema = cinemaController.Get(id.Value);
+            if (selectedAsCinema == null) return;
+            new ActionsCinemaWindow(new EditCinemaMode(selectedAsCinema, cinemaController)).ShowDialog();
             checker.Variable = true;
         }
 
@@ -66,25 +61,34 @@ namespace MovieHacker.Views
             checker.Variable = true;
         }
 
-        private void deleteGenre_Click(object sender, RoutedEventArgs e)
+        private void deleteCinema_Click(object sender, RoutedEventArgs e)
         {
-            if (listBoCinemas.SelectedItem == null) return;
-            var id = int.Parse(listBoCinemas.SelectedItem.ToString().Split(',')[0].Split(' ')[^1]);
-            var selected = new MHDataBase().Cinemas.Where(x => x.Id == id).First();
+            var id = GetIdFromSelectedItem();
+            if (!id.HasValue) return;
+            var selected = cinemaController.Get(id.Value);
             if (selected == null) return;
             if (MessageBox.Show($"Вы действительное хотите удалить кинотеатр - {selected.Name}", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                new CinemaController().RemoveAt(selected.Id);
+                cinemaController.Remove(selected);
                 checker.Variable = true;
             }
+        }
+        private int? GetIdFromSelectedItem()
+        {
+            var str = listBoCinemas.SelectedItem.ToString();
+            if (str == null) return null;
+            var splited = str.Split(',')[0].Split(' ')[^1];
+            return Convert.ToInt32(splited);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             if (btn == null || btn.Tag == null) return;
-            var tag = int.Parse(btn.Tag.ToString());
-            new ActionsCinemaWindow(new AboutCinemaMode(new MHDataBase().Cinemas.Include(x=>x.FilmRooms).Where(x=>x.Id == tag).First())).ShowDialog();
+            var id = Convert.ToInt32(btn.Tag);
+            var cinema = cinemaController.Get(id);
+            if (cinema == null) return;
+            new ActionsCinemaWindow(new AboutCinemaMode(cinema)).ShowDialog();
         }
     }
 }

@@ -9,20 +9,21 @@ namespace MovieHacker.Model.WindowsModes
 {
     public class AddNewMovieMode : IMovieWindowMode
     {
+        public MovieController MovieController { get; }
         public Movie Movie { get; set; } 
         
         public bool IsReadOnly => false;
 
         public string ButtonContent => "Добавить";
 
-        public AddNewMovieMode()
+        public AddNewMovieMode(MovieController mC)
         {
+            MovieController = mC;
             Movie = new Movie();
         }
         public void Execute()
         {
-
-            new MovieController().Add(Movie);
+            MovieController.Add(Movie);
         }
     }
 }

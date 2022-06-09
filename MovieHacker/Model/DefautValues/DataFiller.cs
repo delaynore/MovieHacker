@@ -71,30 +71,24 @@ namespace MovieHacker.Model
                 };
                 
                 db.FilmRooms.AddRange(filmrooms);
-                var movies = new[]
-                {
-                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.ManInBlack)},//0
-                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Avengers)},//1
-                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.SpiderMan3)},//2
-                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Titanic)},//3
-                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheMask)},//4
-                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheWizardOfOz)},//5
-                };
-                db.Movies.AddRange(movies);
                 var movietogenre = new[]
                 {
-                    new MovieToGenre { Genre = genres[4], Movie = movies[0]},
-                    new MovieToGenre { Genre = genres[4], Movie = movies[5]},
-                    new MovieToGenre { Genre = genres[4], Movie = movies[2]},
-                    new MovieToGenre { Genre = genres[4], Movie = movies[4]},
-                    new MovieToGenre { Genre = genres[4], Movie = movies[1]},
-                    new MovieToGenre { Genre = genres[6], Movie = movies[3]},
-                    new MovieToGenre { Genre = genres[9], Movie = movies[5]},
-                    new MovieToGenre { Genre = genres[5], Movie = movies[0]},
-                    new MovieToGenre { Genre = genres[5], Movie = movies[1]},
-                    new MovieToGenre { Genre = genres[5], Movie = movies[2]},
+                    new List<Genre>() { genres[4], genres[5]},
+                    new List<Genre>  { genres[4], genres[0] },
+                    new List<Genre>  { genres[6]},
+                    new List<Genre>  { genres[9]},
                 };
-                db.MovieToGenres.AddRange(movietogenre);
+                var movies = new[]
+                {
+                    new Movie { Title = "Люди в черном", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.ManInBlack), Genres = movietogenre[0]},//0
+                    new Movie { Title = "Мстители", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Avengers), Genres = movietogenre[0]},//1
+                    new Movie { Title = "Человек-паук 3", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.SpiderMan3), Genres = movietogenre[0]},//2
+                    new Movie { Title = "Титаник", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.Titanic), Genres = movietogenre[2]},//3
+                    new Movie { Title = "Маска", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheMask), Genres = movietogenre[1]},//4
+                    new Movie { Title = "Волшебник страны Оз", DurationInMinutes = rand.Next(100, 240), IsActual = true, Picture = ImageBase64Converter.ImageToBase64(Resource.TheWizardOfOz), Genres = movietogenre[3]},//5
+                };
+                db.Movies.AddRange(movies);
+                
                 List<Session> sessions = new List<Session>();
                 for (int i = 0; i < 100; i++)
                 {

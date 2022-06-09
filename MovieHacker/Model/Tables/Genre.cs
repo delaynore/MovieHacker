@@ -6,6 +6,6 @@ namespace MovieHacker.Model.Tables
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<MovieToGenre> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

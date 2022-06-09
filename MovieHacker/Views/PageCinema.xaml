@@ -41,7 +41,7 @@
                 <TextBox x:Name="textBoxFind" VerticalContentAlignment="Center" Width="250" Style="{StaticResource myTextBox}" TextChanged="textBoxFind_TextChanged" Margin="5"/>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="deleteGenre" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" Click="deleteGenre_Click" FontSize="{StaticResource Little}"></Button>
+                <Button x:Name="deleteCinema" Content="Удалить" Style="{StaticResource RedButton1}" Margin="5" Click="deleteCinema_Click" FontSize="{StaticResource Little}"></Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
@@ -51,7 +51,7 @@
                     <DataTemplate>
                         <Border>
                             <Grid>
-                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="{StaticResource Regular}" VerticalAlignment="Center" />
                                 <Button Content="Подробнее..." Tag="{Binding Id}"  Style="{StaticResource BlueButton}" FontSize="{StaticResource Little}" Click="Button_Click"  BorderThickness="0,0,0,2" HorizontalAlignment="Right"/>
                             </Grid>
                         </Border>

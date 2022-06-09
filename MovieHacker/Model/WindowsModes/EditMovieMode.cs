@@ -9,10 +9,12 @@ namespace MovieHacker.Model.WindowsModes
 {
     public class EditMovieMode : IMovieWindowMode
     {
+        public MovieController MovieController { get; set; }
         public Movie Movie { get; set; }
-        public EditMovieMode(Movie movie)
+        public EditMovieMode(Movie movie, MovieController mC)
         {
             Movie = movie;
+            MovieController = mC;
         }
 
         public bool IsReadOnly => false;
@@ -21,7 +23,7 @@ namespace MovieHacker.Model.WindowsModes
 
         public void Execute()
         {
-            new MovieController().Update(Movie);
+            MovieController.Update(Movie);
         }
     }
 }

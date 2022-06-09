@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MovieHacker.Model.Tables;
 
 namespace MovieHacker.Model.WindowsModes
 {
     public interface IGenreWindowMode : IMode
     {
-        public string TitleText { get; }
+        public GenreController GenreController { get; }
+        public Genre Genre { get; set; }
         public string TextBlockText { get; }
         public string ButtonContent { get; }
-        public string? GenreName { get; set; }
     }
 }

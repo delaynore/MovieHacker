@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using MovieHacker.Model.Tables;
 
@@ -9,9 +8,13 @@ namespace MovieHacker.Model
 {
     public class GenreController : IDataBaseController<Genre>
     {
-        public bool Add(Genre x)
+        private MHDataBase db;
+        public GenreController()
         {
-            using var db = new MHDataBase();
+            db = new();
+        }
+        public override bool Add(Genre x)
+        {
             try
             {
                 db.Genres.Add(x);
@@ -24,9 +27,8 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool AddRange(params Genre[] x)
+        public override bool AddRange(params Genre[] x)
         {
-            using var db = new MHDataBase();
             try
             {
                 db.Genres.AddRange(x);
@@ -39,33 +41,24 @@ namespace MovieHacker.Model
             }
         }
 
-        public Genre? Get(int id)
+        public override Genre? Get(int id)
         {
-            using var db = new MHDataBase();
             var res = db.Genres.FirstOrDefault(x => x.Id == id);
             return res;
         }
         public Genre? Get(string name)
         {
-            using var db = new MHDataBase();
             var res = db.Genres.FirstOrDefault(x => x.Name == name);
             return res;
         }
-        public List<Genre> GetAll()
+
+        public override List<Genre> GetAll()
         {
-            return GetAll(x => true);
+            return db.Genres.Include(x=>x.Movies).ToList();
         }
 
-        public List<Genre> GetAll(Func<Genre, bool> selector)
+        public override bool Remove(Genre x)
         {
-            using var db = new MHDataBase();
-            db.Genres.Load();
-            return db.Genres.Local.Where(x => selector(x)).ToList();
-        }
-
-        public bool Remove(Genre x)
-        {
-            using var db = new MHDataBase();
             try
             {
                 db.Genres.Remove(x);
@@ -78,33 +71,34 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool RemoveAt(int index)
+        public override bool RemoveAt(int index)
         {
-            using (var db = new MHDataBase())
+            try
             {
-                try
-                {
-                    db.Genres.Remove(db.Genres.First(x => x.Id == index));
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-                finally
-                {
-                    db.SaveChanges();
-                   
-                }
+                db.Genres.Remove(db.Genres.First(x => x.Id == index));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                db.SaveChanges();
+
             }
             return true;
         }
 
-        public bool Update(Genre x)
+        public override void SaveChanges()
         {
-            using var db = new MHDataBase();
+            db.SaveChanges();
+        }
+
+        public override bool Update( params Genre[] x)
+        {
             try
             {
-                db.Genres.Update(x);
+                db.Genres.UpdateRange(x);
                 db.SaveChanges();
                 return true;
             }
@@ -114,9 +108,11 @@ namespace MovieHacker.Model
             }
         }
 
-        public bool Update(int id)
+        public override bool Update(int id)
         {
-            return Update(Get(id));
+            var x = Get(id);
+            if (x == null) return false;
+            return Update(x);
         }
     }
 }

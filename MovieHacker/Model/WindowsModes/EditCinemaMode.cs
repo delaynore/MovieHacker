@@ -9,17 +9,19 @@ namespace MovieHacker.Model.WindowsModes
 {
     public class EditCinemaMode : ICinemaWindowMode
     {
+        public CinemaController CinemaController { get; }
         public Cinema Cinema { get; set; }
         public bool IsReadOnly => false;
         public string ButtonContent => "Сохранить";
-        public EditCinemaMode(Cinema cinema)
+        public EditCinemaMode(Cinema cinema, CinemaController cC)
         {
             Cinema = cinema;
+            CinemaController = cC;
         }
         public void Execute()
         {
 
-            new CinemaController().Update(Cinema);
+            CinemaController.Update(Cinema);
         }
     }
 }
