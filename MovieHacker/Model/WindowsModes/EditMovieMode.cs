@@ -1,20 +1,16 @@
 ﻿using MovieHacker.Model.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class EditMovieMode : IMovieWindowMode
+    public class EditMovieMode : IWindowMode<Movie>
     {
-        public MovieController MovieController { get; set; }
-        public Movie Movie { get; set; }
-        public EditMovieMode(Movie movie, MovieController mC)
+        public MHDataBase Db { get; }
+        public Movie Entity { get; }
+        public EditMovieMode(Movie movie, MHDataBase db)
         {
-            Movie = movie;
-            MovieController = mC;
+            Entity = movie;
+            Db = db;
         }
 
         public bool IsReadOnly => false;
@@ -23,7 +19,7 @@ namespace MovieHacker.Model.WindowsModes
 
         public void Execute()
         {
-            MovieController.Update(Movie);
+            Db.Entry(Entity).State = EntityState.Modified;
         }
     }
 }

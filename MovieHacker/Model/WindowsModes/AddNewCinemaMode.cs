@@ -2,21 +2,25 @@
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class AddNewCinemaMode : ICinemaWindowMode
+    public class AddNewCinemaMode : IWindowMode<Cinema>
     {
-        public CinemaController CinemaController { get; }
-        public Cinema Cinema { get; set; }
+
+        public AddNewCinemaMode(MHDataBase db)
+        {
+            Entity = new Cinema();
+            Db = db;
+        }
+        public MHDataBase Db { get; }
+
+        public Cinema Entity { get; }
+
         public bool IsReadOnly => false;
 
         public string ButtonContent => "Добавить";
-        public AddNewCinemaMode(CinemaController cC)
-        {
-            Cinema = new Cinema();
-            CinemaController = cC;
-        }
+
         public void Execute()
         {
-            CinemaController.Add(Cinema);
+            Db.Add(Entity);
         }
     }
 }

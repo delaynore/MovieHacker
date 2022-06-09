@@ -1,24 +1,28 @@
 ﻿using MovieHacker.Model.Tables;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class EditGenreMode : IGenreWindowMode
+    public class EditGenreMode : IWindowMode<Genre>
     {
-        public string TextBlockText => "Введите новое название:";
 
         public string ButtonContent => "Сохранить";
 
-        public Genre Genre { get; set; }
-        public GenreController GenreController { get; }
-        public EditGenreMode(Genre genre, GenreController gC)
+        public Genre Entity { get; set; }
+
+        public MHDataBase Db { get; }
+
+        public bool IsReadOnly => false;
+
+        public EditGenreMode(Genre genre, MHDataBase db)
         {
-            Genre = genre;
-            GenreController = gC;
+            Entity = genre;
+            Db = db;
         }
 
         public void Execute()
         {
-            GenreController.Update(Genre);
+            Db.Entry(Entity).State = EntityState.Modified;
         }
     }
 }

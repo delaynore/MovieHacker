@@ -1,27 +1,28 @@
-﻿using MovieHacker.Model.Tables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieHacker.Model.Tables;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class EditCinemaMode : ICinemaWindowMode
+    public class EditCinemaMode : IWindowMode<Cinema>
     {
-        public CinemaController CinemaController { get; }
-        public Cinema Cinema { get; set; }
+        public MHDataBase Db { get; }
+
+        public Cinema Entity { get; }
+
         public bool IsReadOnly => false;
+
         public string ButtonContent => "Сохранить";
-        public EditCinemaMode(Cinema cinema, CinemaController cC)
+
+        public EditCinemaMode(Cinema cinema, MHDataBase db)
         {
-            Cinema = cinema;
-            CinemaController = cC;
+            Entity = cinema;
+            Db = db;
         }
+
         public void Execute()
         {
 
-            CinemaController.Update(Cinema);
+            Db.Entry(Entity).State = EntityState.Modified;
         }
     }
 }

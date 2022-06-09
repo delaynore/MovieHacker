@@ -1,20 +1,20 @@
 ﻿using MovieHacker.Model.Tables;
+
 namespace MovieHacker.Model.WindowsModes
 {
-    public class AboutCinemaMode : ICinemaWindowMode
+    public class AboutCinemaMode : IWindowMode<Cinema>
     {
-        public CinemaController CinemaController { get; }
-        public Cinema Cinema { get; set; }
+        public MHDataBase? Db { get; }
+
+        public Cinema Entity { get; }
+
         public bool IsReadOnly => true;
+
         public string ButtonContent => "Закрыть";
         public AboutCinemaMode(Cinema cinema)
         {
-            Cinema = cinema;
-            CinemaController = null!;
+            Entity = cinema;
         }
-        public void Execute()
-        {
-
-        }
+        public void Execute() { }
     }
 }

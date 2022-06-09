@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class AddNewMovieMode : IMovieWindowMode
+    public class AddNewMovieMode : IWindowMode<Movie>
     {
-        public MovieController MovieController { get; }
-        public Movie Movie { get; set; } 
+        public MHDataBase Db { get; }
+        public Movie Entity { get; set; } 
         
         public bool IsReadOnly => false;
 
         public string ButtonContent => "Добавить";
 
-        public AddNewMovieMode(MovieController mC)
+        public AddNewMovieMode(MHDataBase db)
         {
-            MovieController = mC;
-            Movie = new Movie();
+            Db = db;
+            Entity = new Movie();
         }
         public void Execute()
         {
-            MovieController.Add(Movie);
+            Db.Add(Entity);
         }
     }
 }
