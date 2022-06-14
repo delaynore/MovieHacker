@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MovieHacker.Model;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +14,6 @@ namespace MovieHacker.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //DataFiller.Fill();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

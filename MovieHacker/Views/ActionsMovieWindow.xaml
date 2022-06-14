@@ -97,7 +97,7 @@
                             <Button x:Name="delGenre" Style="{StaticResource RedButtonGenre}" Content="Удалить" Margin="5" BorderThickness="0,0,0,2" Click="delGenre_Click"/>
                         </StackPanel>
                     </StackPanel>
-                    <Button x:Name="button1" Style="{StaticResource BlueButton2}" Content="Сохранить" BorderThickness="0,0,0,2" HorizontalAlignment="Right" Click="Button1_Click" Margin="5 0 5 5"/>
+                    <Button x:Name="button1" Style="{StaticResource BlueButton2}" Content="Сохранить" BorderThickness="0,0,0,2" HorizontalAlignment="Right" Click="Button1_Click" Margin="5 0 5 5" IsDefault="True"/>
                 </StackPanel>
             </Grid>
         </Grid>

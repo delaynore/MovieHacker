@@ -16,20 +16,18 @@ namespace MovieHacker.Views
     /// </summary>
     public partial class ActionsCinemaWindow : Window
     {
-        private ICinemaWindowMode mode;
-        private ICollection<FilmRoom>? filmRooms;
-        //private ICollection<FilmRoom>? filmRoomsToDelete;
-        private CinemaController cinemaController;
-        private BoolEvent checker;
-        public ActionsCinemaWindow(ICinemaWindowMode windowMode)
+        private IWindowMode<Cinema> mode;
+        private readonly BoolEvent checker;
+        public ActionsCinemaWindow(IWindowMode<Cinema> windowMode)
         {
             InitializeComponent();
             checker = new();
             checker.ForDo += UpdateFilmRooms;
-            cinemaController = new();
             mode = windowMode;
-            desc1.Text = mode.Cinema.Description;
-            name1.Text = mode.Cinema.Name;
+
+            desc1.Text = mode.Entity.Description;
+            name1.Text = mode.Entity.Name;
+
             button1.Content = mode.ButtonContent;
             desc1.IsReadOnly = mode.IsReadOnly;
             name1.IsReadOnly = mode.IsReadOnly;
@@ -37,29 +35,21 @@ namespace MovieHacker.Views
             delFilmRoom.Visibility = mode.IsReadOnly.BoolToVisibility();
             filmRoomName.Visibility = mode.IsReadOnly.BoolToVisibility();
             filmRoomCapacity.Visibility = mode.IsReadOnly.BoolToVisibility();
-            filmRooms = mode.Cinema.FilmRooms;
             checker.Variable = true;
         }
         private void UpdateFilmRooms()
         {
-            listBoxFilmRooms.ItemsSource = filmRooms?.Select(x=> $"{x.Name} - {x.Capacity} м.");
+            listBoxFilmRooms.ItemsSource = mode.Entity.FilmRooms?.Select(x=> $"{x.Name} - {x.Capacity} м.");
             checker.Variable = false;
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (!mode.IsReadOnly)
             {
-                //if(filmRoomsToDelete != null)
-                //{
-                //    using var db = new MHDataBase();
-                //    db.FilmRooms.RemoveRange(filmRoomsToDelete);
-                //    db.SaveChanges();
-                //}
-                if (mode.Cinema.Id == 0)
-                    mode.Cinema.FilmRooms = filmRooms;
-                mode.Cinema.Name = name1.Text;
-                mode.Cinema.Description = desc1.Text;
+                mode.Entity.Name = name1.Text;
+                mode.Entity.Description = desc1.Text;
                 mode.Execute();
+                mode.Db.SaveChanges();
             }
 
             Close();
@@ -67,14 +57,14 @@ namespace MovieHacker.Views
 
         private void addFilmRoom_Click(object sender, RoutedEventArgs e)
         {
-            if (filmRooms == null) filmRooms = new List<FilmRoom>();
-            if (filmRooms.Select(x => x.Name).IsAlreadyExistInEnumerable(filmRoomName.Text))
+            if (mode.Entity.FilmRooms == null) mode.Entity.FilmRooms = new List<FilmRoom>();
+            if (mode.Entity.FilmRooms.Select(x => x.Name).IsAlreadyExistInEnumerable(filmRoomName.Text))
             {
                 MessageBox.Show($"{filmRoomName.Text} такой зал уже существует, введите другое имя", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-                
-            filmRooms.Add(new FilmRoom { Name = filmRoomName.Text, Capacity = int.Parse(filmRoomCapacity.Text), Cinema = mode.Cinema });
+
+            mode.Entity.FilmRooms.Add(new FilmRoom { Name = filmRoomName.Text, Capacity = int.Parse(filmRoomCapacity.Text), Cinema = mode.Entity });
             filmRoomName.Text = "";
             filmRoomCapacity.Text = "";
             checker.Variable = true;
@@ -82,9 +72,9 @@ namespace MovieHacker.Views
 
         private void delFilmRoom_Click(object sender, RoutedEventArgs e)
         {
-            var name = GetNameFromSelected();
-            if (name == null) return;
-            filmRooms?.Remove(filmRooms.First(x=>x.Name == name));
+            var filmRoom = GetNameFromSelected();
+            if (filmRoom == null) return;
+            mode.Entity.FilmRooms?.Remove(filmRoom);
             checker.Variable = true;
         }
 
@@ -93,12 +83,12 @@ namespace MovieHacker.Views
             if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
 
-        private string GetNameFromSelected()
+        private FilmRoom? GetNameFromSelected()
         {
             var selected = listBoxFilmRooms.SelectedItem.ToString();
             if (selected == null) return null;
             var splited = selected.Split(' ')[0];
-            return splited;
+            return mode.Db.FilmRooms.FirstOrDefault(x=>x.Name.CompareTo(splited) == 0);
         }
     }
 }

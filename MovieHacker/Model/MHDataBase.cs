@@ -14,13 +14,11 @@ namespace MovieHacker.Model
         public MHDataBase()
         {
             Database.EnsureCreated();
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=mh.db");
-            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +30,6 @@ namespace MovieHacker.Model
                 entity.Property(c => c.Description).HasMaxLength(2048).IsRequired(false);
 
                 entity.HasMany(f => f.FilmRooms).WithOne(c => c.Cinema).HasForeignKey(c => c.CinemaId);
-
             });
 
             modelBuilder.Entity<FilmRoom>(entity =>
@@ -55,8 +52,9 @@ namespace MovieHacker.Model
                 entity.Property(m => m.Description).HasMaxLength(2048).IsRequired(false);
                 entity.Property(m => m.Picture).IsRequired(false);
 
-                entity.HasMany(x => x.Genres).WithMany(x => x.Movies).UsingEntity(x => x.ToTable("MovieToGenre"));
+                entity.HasMany(x => x.Genres).WithMany(x => x.Movies);
             });
+
             modelBuilder.Entity<Session>(entity =>
             {
                 entity.HasKey(s => s.Id);

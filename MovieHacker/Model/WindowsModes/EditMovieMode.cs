@@ -1,5 +1,6 @@
 ﻿using MovieHacker.Model.Tables;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace MovieHacker.Model.WindowsModes
 {
@@ -19,7 +20,7 @@ namespace MovieHacker.Model.WindowsModes
 
         public void Execute()
         {
-            Db.Entry(Entity).State = EntityState.Modified;
+            Db.Movies.Update(Entity);
         }
     }
 }

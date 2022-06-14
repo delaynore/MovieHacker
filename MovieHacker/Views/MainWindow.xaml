@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
-        Title="МувиХакер" Height="450" Width="850"
+        Title="МувиХакер" Height="450" Width="850" MinHeight="400" MinWidth="760"
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource BaseFont}"
         FontSize="{StaticResource Regular}">
@@ -25,7 +25,7 @@
                 <Button x:Name="navbtnMovies" Style="{StaticResource BlueButton}" Tag="Movies" Content="Фильмы"  Margin="10,0"/>
                 <Button x:Name="navbtnGenres" Style="{StaticResource BlueButton}" Tag="Genres" Content="Жанры"  Margin="10,0"/>
                 <Button x:Name="navbtnCinema" Style="{StaticResource BlueButton}" Tag="Cinema" Content="Кинотеатры"  Margin="10,0"/>
-                <Button x:Name="navbtnAdmin" Style="{StaticResource BlueButton}" Tag="Admin" Content="Администрирование"  Margin="10,0"/>
+                <Button x:Name="navbtnAdmin" Style="{StaticResource BlueButton}" Tag="Admin" Content="Администратор"  Margin="10,0"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">

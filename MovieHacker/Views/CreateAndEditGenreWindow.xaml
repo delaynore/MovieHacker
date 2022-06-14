@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MovieHacker.Views"
         mc:Ignorable="d"
         Title="" SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Padding="10">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Padding="10" FontFamily="{StaticResource BaseFont}">
     <Window.Resources>
         <Style x:Key="BlueButtonNew" BasedOn="{StaticResource BlueButton}" TargetType="Button">
             <Style.Triggers>
@@ -18,9 +18,10 @@
     </Window.Resources>
     <Grid Margin="10">
         <WrapPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="textHint" Text="" Margin="5"/>
+            <TextBlock Text="Название жанра: " Margin="5"/>
             <TextBox x:Name="textGenre"  Style="{StaticResource myTextBox}" Margin="5"/>
-            <Button x:Name="button" Style="{StaticResource BlueButtonNew}" BorderThickness="0,0,0,2" Content="" Margin="5" Click="Button_Click"/>
+            <Button x:Name="button" Style="{StaticResource BlueButtonNew}" BorderThickness="0,0,0,2" Content="" Margin="5" Click="Button_Click"
+                    IsDefault="True"/>
         </WrapPanel>
     </Grid> 
 </Window>

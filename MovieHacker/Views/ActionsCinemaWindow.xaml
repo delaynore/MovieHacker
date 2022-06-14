@@ -50,7 +50,7 @@
                 <Button x:Name="addFilmRoom" Content="Добавить" Style="{StaticResource BlueButton2}" Margin="5" Click="addFilmRoom_Click" BorderThickness="0 0 0 2"/>
                 <Button x:Name="delFilmRoom" Content="Удалить"  Style="{StaticResource RedButton1}" Margin="5" Click="delFilmRoom_Click"   BorderThickness="0 0 0 2"/>
             </WrapPanel>
-            <Button x:Name="button1" Margin="5" Style="{StaticResource BlueButton1}" Content="" HorizontalAlignment="Right" Width="100" Click="Button_Click"  BorderThickness="0 0 0 2"/>
+            <Button x:Name="button1" Margin="5" Style="{StaticResource BlueButton1}" Content="" HorizontalAlignment="Right" Width="100" Click="Button_Click"  BorderThickness="0 0 0 2" IsDefault="True"/>
         </WrapPanel>
         
         

@@ -6,9 +6,32 @@
       xmlns:local="clr-namespace:MovieHacker.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageAdmin">
-
+      Title="PageAdmin" Background="{StaticResource WhiteBrush}" FontFamily="{StaticResource BaseFont}" FontSize="{StaticResource Big}">
+    <Page.Resources>
+        <Style x:Key="BlueButton1" BasedOn="{StaticResource BlueButton}" TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=login}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=password}" Value="">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
-            
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel x:Name="stackPanelLogin" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                <TextBlock Text="Логин: "/>
+                <TextBox x:Name="login" Width="150" Focusable="True"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" x:Name="stackPanelPassword" Margin="5" HorizontalAlignment="Right">
+                <TextBlock Text="Пароль: "/>
+                <PasswordBox x:Name="password" Width="150" PasswordChar="*" Focusable="True"/>
+            </StackPanel>
+            <Button x:Name="signin" Style="{StaticResource BlueButton1}" Content="Войти" Click="Button_Click" Margin="5" BorderThickness="0 0 0 2" IsDefault="True"/>
+            <Button  x:Name="signout" Style="{StaticResource RedButton}" Content="Выйти" Click="Button_Click_1" Margin="5" Visibility="Collapsed"/>
+        </StackPanel>
+        
     </Grid>
 </Page>

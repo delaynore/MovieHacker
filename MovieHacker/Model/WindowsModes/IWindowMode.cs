@@ -8,7 +8,7 @@ namespace MovieHacker.Model.WindowsModes
 {
     public interface IWindowMode<TEntity> where TEntity : class
     {
-        public MHDataBase? Db { get; }
+        public MHDataBase Db { get; }
         public TEntity Entity { get; }
         public bool IsReadOnly { get; }
         public string ButtonContent { get; }

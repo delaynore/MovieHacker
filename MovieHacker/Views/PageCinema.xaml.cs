@@ -7,23 +7,28 @@ using Microsoft.EntityFrameworkCore;
 using MovieHacker.Model.WindowsModes;
 using MovieHacker.Model.Extensions;
 using System;
+using MovieHacker.Model.Tables;
 
 namespace MovieHacker.Views
 {
     public partial class PageCinema : Page
     {
-        private BoolEvent checker;
-        private CinemaController cinemaController;
+        private readonly BoolEvent checker;
+        private readonly MHDataBase db;
         public PageCinema()
         {
             InitializeComponent();
             checker = new();
             checker.ForDo += UpdateCinemas;
-            cinemaController = new();
+            db = new();
+
+            addCinema.Visibility = Users.ToVisibility();
+            deleteCinema.Visibility = Users.ToVisibility();
+            editCinema.Visibility = Users.ToVisibility();
         }
         private void UpdateCinemas()
         {
-            var s = cinemaController.GetAll().Select(x => new { x.Id, x.Name }).Where(x => x.Name!.IsContains(textBoxFind.Text));
+            var s = db.Cinemas.Include(x=>x.FilmRooms).AsEnumerable().Select(x => new { x.Id, x.Name }).Where(x => x.Name!.IsContains(textBoxFind.Text));
             listBoCinemas.ItemsSource = s.ToList();
             checker.Variable = false;
 
@@ -35,18 +40,16 @@ namespace MovieHacker.Views
 
         private void addCinema_Click(object sender, RoutedEventArgs e)
         {
-            new ActionsCinemaWindow(new AddNewCinemaMode(cinemaController)).ShowDialog();
+            new ActionsCinemaWindow(new AddNewCinemaMode(db)).ShowDialog();
             checker.Variable = true;
         }
 
 
         private void editCinema_Click(object sender, RoutedEventArgs e)
         {
-            var id = GetIdFromSelectedItem();
-            if (!id.HasValue) return;
-            var selectedAsCinema = cinemaController.Get(id.Value);
-            if (selectedAsCinema == null) return;
-            new ActionsCinemaWindow(new EditCinemaMode(selectedAsCinema, cinemaController)).ShowDialog();
+            var cinema = GetIdFromSelectedItem();
+            if (cinema == null) return;
+            new ActionsCinemaWindow(new EditCinemaMode(cinema, db)).ShowDialog();
             checker.Variable = true;
         }
 
@@ -63,22 +66,22 @@ namespace MovieHacker.Views
 
         private void deleteCinema_Click(object sender, RoutedEventArgs e)
         {
-            var id = GetIdFromSelectedItem();
-            if (!id.HasValue) return;
-            var selected = cinemaController.Get(id.Value);
-            if (selected == null) return;
-            if (MessageBox.Show($"Вы действительное хотите удалить кинотеатр - {selected.Name}", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            var cinema = GetIdFromSelectedItem();
+            if (cinema == null) return;
+            if (MessageBox.Show($"Вы действительное хотите удалить кинотеатр - {cinema.Name}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                cinemaController.Remove(selected);
+                db.Remove(cinema);
+                db.SaveChanges();
                 checker.Variable = true;
             }
         }
-        private int? GetIdFromSelectedItem()
+        private Cinema? GetIdFromSelectedItem()
         {
             var str = listBoCinemas.SelectedItem.ToString();
             if (str == null) return null;
             var splited = str.Split(',')[0].Split(' ')[^1];
-            return Convert.ToInt32(splited);
+            var id = Convert.ToInt32(splited);
+            return db.Cinemas.Find(id);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -86,7 +89,7 @@ namespace MovieHacker.Views
             var btn = sender as Button;
             if (btn == null || btn.Tag == null) return;
             var id = Convert.ToInt32(btn.Tag);
-            var cinema = cinemaController.Get(id);
+            var cinema = db.Cinemas.Find(id);
             if (cinema == null) return;
             new ActionsCinemaWindow(new AboutCinemaMode(cinema)).ShowDialog();
         }
