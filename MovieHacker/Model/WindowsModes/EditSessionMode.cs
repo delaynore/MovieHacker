@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace MovieHacker.Model.WindowsModes
 {
-    public class AddNewSession : IWindowMode<Session>
+    public class EditSessionMode : IWindowMode<Session>
     {
-        public AddNewSession(MHDataBase db)
+        public EditSessionMode(MHDataBase db, Session session)
         {
             Db = db;
-            Entity = new Session();
+            Entity = session;
         }
 
         public MHDataBase Db { get; }
@@ -21,11 +21,11 @@ namespace MovieHacker.Model.WindowsModes
 
         public bool IsReadOnly => false;
 
-        public string ButtonContent => "Добавить";
+        public string ButtonContent => "Сохранить";
 
         public void Execute()
         {
-            Db.Sessions.Add(Entity);
+            Db.Sessions.Update(Entity);
         }
     }
 }

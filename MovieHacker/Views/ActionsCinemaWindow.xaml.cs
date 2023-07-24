@@ -72,7 +72,7 @@ namespace MovieHacker.Views
 
         private void delFilmRoom_Click(object sender, RoutedEventArgs e)
         {
-            var filmRoom = GetNameFromSelected();
+            var filmRoom = GetFilmRoomFromSelected();
             if (filmRoom == null) return;
             mode.Entity.FilmRooms?.Remove(filmRoom);
             checker.Variable = true;
@@ -83,7 +83,7 @@ namespace MovieHacker.Views
             if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
 
-        private FilmRoom? GetNameFromSelected()
+        private FilmRoom? GetFilmRoomFromSelected()
         {
             var selected = listBoxFilmRooms.SelectedItem.ToString();
             if (selected == null) return null;

@@ -91,7 +91,7 @@ namespace MovieHacker.Views
 
         private void addSession_Click(object sender, RoutedEventArgs e)
         {
-            new AddAndEditSessionWindow(new AddNewSession(db)).ShowDialog();
+            new AddAndEditSessionWindow(new AddNewSessionMode(db)).ShowDialog();
             checker.Variable = true;
         }
 
@@ -99,7 +99,7 @@ namespace MovieHacker.Views
         {
             var session = GetSessionFromString();
             if (session == null) return;
-            new AddAndEditSessionWindow(new EditSession(db, session)).ShowDialog();
+            new AddAndEditSessionWindow(new EditSessionMode(db, session)).ShowDialog();
             checker.Variable = true;
 
         }

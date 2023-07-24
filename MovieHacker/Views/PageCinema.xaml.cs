@@ -47,7 +47,7 @@ namespace MovieHacker.Views
 
         private void editCinema_Click(object sender, RoutedEventArgs e)
         {
-            var cinema = GetIdFromSelectedItem();
+            var cinema = GetCinemaFromSelectedItem();
             if (cinema == null) return;
             new ActionsCinemaWindow(new EditCinemaMode(cinema, db)).ShowDialog();
             checker.Variable = true;
@@ -66,7 +66,7 @@ namespace MovieHacker.Views
 
         private void deleteCinema_Click(object sender, RoutedEventArgs e)
         {
-            var cinema = GetIdFromSelectedItem();
+            var cinema = GetCinemaFromSelectedItem();
             if (cinema == null) return;
             if (MessageBox.Show($"Вы действительное хотите удалить кинотеатр - {cinema.Name}?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -75,7 +75,7 @@ namespace MovieHacker.Views
                 checker.Variable = true;
             }
         }
-        private Cinema? GetIdFromSelectedItem()
+        private Cinema? GetCinemaFromSelectedItem()
         {
             var str = listBoCinemas.SelectedItem.ToString();
             if (str == null) return null;

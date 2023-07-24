@@ -15,7 +15,7 @@ namespace MovieHacker.Views
     public partial class AboutSessionWindow : Window
     {
         private MHDataBase db;
-        private Session session;
+        private Session? session;
         public AboutSessionWindow(int id, MHDataBase mHDataBase)
         {
             InitializeComponent();
@@ -40,6 +40,7 @@ namespace MovieHacker.Views
 
         private void toBookATicket_Click(object sender, RoutedEventArgs e)
         {
+            if (session == null) return;
             var countInt = Convert.ToInt32(count.Text);
             
             if (countInt < 1 || countInt > 5) 
